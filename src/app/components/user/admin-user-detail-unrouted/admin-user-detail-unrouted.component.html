@@ -1,0 +1,61 @@
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+        <div class="alert alert-danger" role="alert">
+            {{status!.error.message}} - {{status!.message}}
+        </div>
+    </div>
+</div>
+
+<div *ngIf="status==null">
+    <table class="table table-striped table-hover">
+        <tbody>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <th>id</th>
+                <td>{{oUser.id}}</td>
+            </tr>
+            <tr>
+                <th>name</th>
+                <td>{{oUser.name}}</td>
+            </tr>
+            <tr>
+                <th>surname</th>
+                <td>{{oUser.surname}}</td>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td>{{oUser.email}}</td>
+            </tr>
+            <tr>
+                <th>username</th>
+                <td>{{oUser.username}}</td>
+            </tr>
+            <tr>
+                <th>role</th>
+                <td>
+                    <span *ngIf="oUser.role==true">Admin</span>
+                    <span *ngIf="oUser.role==false">User</span>
+                </td>
+            </tr>
+            <tr>
+                <th>books</th>
+                <td>
+                    <a [routerLink]="['/admin','book','plist','byuser',oUser.id]"
+                        *ngIf="oUser.books>0">{{oUser.books}}</a>
+                    <span *ngIf="oUser.books==0">0</span>
+                </td>
+            </tr>
+            <tr>
+                <th>loans</th>
+                <td>
+                    <a [routerLink]="['/admin','loan','plist','byuser',oUser.id]"
+                        *ngIf="oUser.loans>0">{{oUser.loans}}</a>
+                    <span *ngIf="oUser.loans==0">0</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

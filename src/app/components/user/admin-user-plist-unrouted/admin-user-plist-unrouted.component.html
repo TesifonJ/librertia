@@ -1,0 +1,94 @@
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+      <div class="alert alert-danger" role="alert">
+        {{status!.error.message}} - {{status!.message}}
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="status==null">
+    <div class="d-flex justify-content-between mb-3">
+      <h3>No active filter</h3>
+      <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} users.</h3>
+    </div>
+    <div class="flex justify-content-center mb-3">
+      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+        [totalRecords]="oPage?.totalElements || 0"></p-paginator>
+    </div>
+  
+  
+    <div class="mb-5 ">
+      <table class="table table-bordered table-striped table-hover table-sm">
+        <thead>
+          <tr>
+            <th (click)="doOrder('id')">ID</th>
+            <th (click)="doOrder('name')">Name</th>
+            <th (click)="doOrder('surname')">Surname</th>
+            <th (click)="doOrder('lastname')">Last name</th>
+            <th (click)="doOrder('email')">Email</th>
+            <th (click)="doOrder('username')">Username</th>
+            <th (click)="doOrder('role')">Role</th>
+            <th>books</th>
+            <th>loans</th>
+            <th>Tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let u of oPage?.content" class="align-middle">
+            <td class="text-end"><strong>{{u.id}}</strong></td>
+            <td>{{u.name}}</td>
+            <td>{{u.surname}}</td>
+            <td>{{u.lastname}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.username}}</td>
+            <td class="text-center">
+              <span *ngIf="u.role==true">User</span>
+              <span *ngIf="u.role==false">Admin</span>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/admin','thread','plist','byuser',u.id]" *ngIf="u.books>0">{{u.books}}</a>
+              <span *ngIf="u.books==0">0</span>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/admin','reply','plist','byuser',u.id]" *ngIf="u.loans>0">{{u.loans}}</a>
+              <span *ngIf="u.loans==0">0</span>
+            </td>
+            <td class="text-center">
+              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button class="btn btn-primary" [routerLink]="['/admin','user','view',u.id]"><i
+                    class="pi pi-eye"></i></button>
+                <button class="btn btn-primary" (click)="doView(u)"><i class="pi pi-arrow-circle-up"></i></button>
+                <button class="btn btn-warning" [routerLink]="['/admin','user','edit',u.id]"><i
+                    class="pi pi-pencil"></i></button>
+                <button *ngIf="u.books==0 && u.loans==0" class="btn btn-danger" (click)="doRemove(u)"><i
+                    class="pi pi-trash"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+  
+  
+  
+  
+  
+    </div>
+  </div>
+  
+  
+  <p-confirmDialog #cd [style]="{ width: '30vw' }">
+    <ng-template pTemplate="header">
+      <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
+    </ng-template>
+    <ng-template pTemplate="message">
+      <div class="container d-flex align-items-center justify-content-center">
+        <app-admin-user-detail-unrouted [id]="oUserToRemove!.id"></app-admin-user-detail-unrouted>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p>¿Are you sure to remove user?</p>
+      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>
