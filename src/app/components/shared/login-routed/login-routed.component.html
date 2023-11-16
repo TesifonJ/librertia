@@ -1,11 +1,56 @@
 <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-auto">
-        <div class="d-flex justify-content-center mb-3">
-          <h1 class="my-5">Login Form</h1>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <div class="d-flex justify-content-center mb-3">
+        <h1 class="my-5">Login Form</h1>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- FORMULARIO LOGIN-->
+<!-- FORMULARIO LOGIN-->
+<div class="flex justify-center">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <p class="form-title">Sign in to your account</p>
+    <div class="input-container">
+      <span>
+        <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+            stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+        </svg>
+      </span>
+
+      <input placeholder="Username" type="text" formControlName="username">
+    </div>
+    <div class="input-container">
+      <span>
+        <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+          class="input-icon">
+          <path
+            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+          </path>
+        </svg>
+      </span>
+
+      <input placeholder="Password" type="password" formControlName="password">
+    </div>
+    <button class="submit" type="submit">
+      Sign in
+    </button>
+
+    <button class="submit" type="reset" (click)="onReset()">Reset</button>
+    
+    <p class="text-center">Log in as</p>
+    <span class="flex justify-center gap-5">
+      <button class="logInAs" (click)="loginAdmin()">Admin</button>
+      <button class="logInAs" (click)="loginUser()">User</button>
+    </span>
+
+
+    <p class="signup-link">
+      No account?
+      <a href="">Sign up</a>
+    </p>
+  </form>
+</div>
