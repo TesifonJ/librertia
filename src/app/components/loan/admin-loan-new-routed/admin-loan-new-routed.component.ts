@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
 })
 export class AdminLoanNewRoutedComponent {
 
+  constructor() { }
+
+  ngOnInit() {
+  }
 }

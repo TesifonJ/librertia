@@ -7,6 +7,10 @@ import { AdminUserPlistRoutedComponent } from './components/user/admin-user-plis
 import { AdminUserViewRoutedComponent } from './components/user/admin-user-view-routed/admin-user-view-routed.component';
 import { AdminUserNewRoutedComponent } from './components/user/admin-user-new-routed/admin-user-new-routed.component';
 import { AdminUserEditRoutedComponent } from './components/user/admin-user-edit-routed/admin-user-edit-routed.component';
+import { AdminLoanPlistRoutedComponent } from './components/loan/admin-loan-plist-routed/admin-loan-plist-routed.component';
+import { AdminLoanViewRoutedComponent } from './components/loan/admin-loan-view-routed/admin-loan-view-routed.component';
+import { AdminLoanNewRoutedComponent } from './components/loan/admin-loan-new-routed/admin-loan-new-routed.component';
+import { AdminLoanEditRoutedComponent } from './components/loan/admin-loan-edit-routed/admin-loan-edit-routed.component';
 
 const routes: Routes = [
   //Shared
@@ -22,7 +26,10 @@ const routes: Routes = [
   //Book 
 
   //Loan
-
+  { path: 'admin/loan/plist', component: AdminLoanPlistRoutedComponent },
+  { path: 'admin/loan/view/:id', component: AdminLoanViewRoutedComponent },    
+  { path: 'admin/loan/new', component: AdminLoanNewRoutedComponent },
+  { path: 'admin/loan/edit/:id', component: AdminLoanEditRoutedComponent },
   //--
 ];
 

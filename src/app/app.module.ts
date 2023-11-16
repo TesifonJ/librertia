@@ -33,7 +33,7 @@ import { SessionAjaxService } from './services/session.ajax.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
-import { ToastModule } from 'primeng/toast';
+import { CalendarModule } from 'primeng/calendar';
 import { AdminBookDetailUnroutedComponent } from './components/book/admin-book-detail-unrouted/admin-book-detail-unrouted.component';
 import { AdminBookEditRoutedComponent } from './components/book/admin-book-edit-routed/admin-book-edit-routed.component';
 import { AdminBookFormUnroutedComponent } from './components/book/admin-book-form-unrouted/admin-book-form-unrouted.component';
@@ -54,10 +54,23 @@ import { AdminLoanViewRoutedComponent } from './components/loan/admin-loan-view-
 import { UserLoanDetailUnroutedComponent } from './components/loan/user-loan-detail-unrouted/user-loan-detail-unrouted.component';
 import { UserLoanFormUnroutedComponent } from './components/loan/user-loan-form-unrouted/user-loan-form-unrouted.component';
 import { UserLoanPlistUnroutedComponent } from './components/loan/user-loan-plist-unrouted/user-loan-plist-unrouted.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminBookSelectionUnroutedComponent } from './components/book/admin-book-selection-unrouted/admin-book-selection-unrouted.component';
+import { TrimPipe } from './pipes/trim.pipe';
+import { TooltipModule } from 'primeng/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
+    TrimPipe,
     AppComponent,
     //Shared
     MenuUnroutedComponent,
@@ -96,7 +109,8 @@ import { UserLoanPlistUnroutedComponent } from './components/loan/user-loan-plis
     AdminLoanViewRoutedComponent,
     UserLoanDetailUnroutedComponent,
     UserLoanFormUnroutedComponent,
-    UserLoanPlistUnroutedComponent
+    UserLoanPlistUnroutedComponent,
+    AdminBookSelectionUnroutedComponent
   ],
   imports: [
     BrowserModule,
@@ -105,15 +119,29 @@ import { UserLoanPlistUnroutedComponent } from './components/loan/user-loan-plis
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    //PrimeNG
+    //--
+    BrowserAnimationsModule,
     DynamicDialogModule,
+    BrowserAnimationsModule,
     PaginatorModule,
+    TableModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    ToastModule
+    CalendarModule,
+    TooltipModule,
 
+    //--
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatIconModule,
+    //--
   ],
   providers: [
+    MatSnackBar,
     MessageService,
     DialogService,
     ConfirmationService,

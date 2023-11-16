@@ -63,11 +63,10 @@ export interface IBookPage extends IPage<IBook> {
 }
 
 export interface ILoan extends IEntity {
-    title: string,
-    body: string,
-    creation: Date,
+    loanDate: Date,
+    dueDate: Date,
+    book: IBook,
     user: IUser,
-    book: IBook
 }
 
 export interface ILoanPage extends IPage<ILoan> {
