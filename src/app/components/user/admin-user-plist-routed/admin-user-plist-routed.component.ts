@@ -35,6 +35,7 @@ export class AdminUserPlistRoutedComponent {
     })
   }
 
+  /*Adaptar*/
   doEmpty($event: Event) {
     this.oConfirmationService.confirm({
       target: $event.target as EventTarget, 

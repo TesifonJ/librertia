@@ -1,94 +1,96 @@
-<div *ngIf="status!=null">
-    <div class="d-flex justify-content-center my-3">
-      <div class="alert alert-danger" role="alert">
-        {{status!.error.message}} - {{status!.message}}
-      </div>
+<div *ngIf="status != null">
+  <div class="flex justify-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
   </div>
-  
-  <div *ngIf="status==null">
-    <div class="d-flex justify-content-between mb-3">
-      <h3>No active filter</h3>
-      <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} users.</h3>
-    </div>
-    <div class="flex justify-content-center mb-3">
-      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-        [totalRecords]="oPage?.totalElements || 0"></p-paginator>
-    </div>
-  
-  
-    <div class="mb-5 ">
-      <table class="table table-bordered table-striped table-hover table-sm">
-        <thead>
-          <tr>
-            <th (click)="doOrder('id')">ID</th>
-            <th (click)="doOrder('name')">Name</th>
-            <th (click)="doOrder('surname')">Surname</th>
-            <th (click)="doOrder('lastname')">Last name</th>
-            <th (click)="doOrder('email')">Email</th>
-            <th (click)="doOrder('username')">Username</th>
-            <th (click)="doOrder('role')">Role</th>
-            <th>books</th>
-            <th>loans</th>
-            <th>Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let u of oPage?.content" class="align-middle">
-            <td class="text-end"><strong>{{u.id}}</strong></td>
-            <td>{{u.name}}</td>
-            <td>{{u.surname}}</td>
-            <td>{{u.lastname}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.username}}</td>
-            <td class="text-center">
-              <span *ngIf="u.role==true">User</span>
-              <span *ngIf="u.role==false">Admin</span>
-            </td>
-            <td class="text-center">
-              <a [routerLink]="['/admin','thread','plist','byuser',u.id]" *ngIf="u.books>0">{{u.books}}</a>
-              <span *ngIf="u.books==0">0</span>
-            </td>
-            <td class="text-center">
-              <a [routerLink]="['/admin','reply','plist','byuser',u.id]" *ngIf="u.loans>0">{{u.loans}}</a>
-              <span *ngIf="u.loans==0">0</span>
-            </td>
-            <td class="text-center">
-              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button class="btn btn-primary" [routerLink]="['/admin','user','view',u.id]"><i
-                    class="pi pi-eye"></i></button>
-                <button class="btn btn-primary" (click)="doView(u)"><i class="pi pi-arrow-circle-up"></i></button>
-                <button class="btn btn-warning" [routerLink]="['/admin','user','edit',u.id]"><i
-                    class="pi pi-pencil"></i></button>
-                <button *ngIf="u.books==0 && u.loans==0" class="btn btn-danger" (click)="doRemove(u)"><i
-                    class="pi pi-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-  
-  
-  
-  
-  
-    </div>
-  </div>
-  
-  
-  <p-confirmDialog #cd [style]="{ width: '30vw' }">
-    <ng-template pTemplate="header">
-      <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
-    </ng-template>
-    <ng-template pTemplate="message">
-      <div class="container d-flex align-items-center justify-content-center">
-        <app-admin-user-detail-unrouted [id]="oUserToRemove!.id"></app-admin-user-detail-unrouted>
+</div>
+
+
+  <div class="relative overflow-auto shadow-md sm:rounded-lg shadow bg-blue-500 p-2">
+
+    <div *ngIf="status == null">
+      <div class="flex justify-between mb-3">
+        <h3 class="text-xl">No active filter</h3>
+        <h3 class="text-xl">Showing {{ oPage?.numberOfElements }} of total {{ oPage?.totalElements }} users.</h3>
       </div>
-    </ng-template>
-    <ng-template pTemplate="footer">
-      <p>¿Are you sure to remove user?</p>
-      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
-    </ng-template>
-  </p-confirmDialog>
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">  
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('name')">Name</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('surname')">Surname</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('email')">Email</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('username')">Username</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('role')">Role</th>
+          <th scope="col" class="px-6 py-3">books</th>
+          <th scope="col" class="px-6 py-3">loans</th>
+          <th scope="col" class="px-6 py-3"><span class="sr-only">Tools</span></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of oPage?.content"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <th scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
+            {{ u.id }}
+          </th>
+
+          <td class="px-6 py-4 text-white">{{ u.name }}</td>
+          <td class="px-6 py-4 text-white">{{ u.surname }}</td>
+          <td class="px-6 py-4 text-white">{{ u.email }}</td>
+          <td class="px-6 py-4 text-white">{{ u.username }}</td>
+
+          <td class="px-6 py-4">
+            <span *ngIf="u.role == true" class="text-green-500">User</span>
+            <span *ngIf="u.role == false" class="text-red-500">Admin</span>
+          </td>
+
+          <td class="px-6 py-4">
+            <a [routerLink]="['/admin','book','plist','byuser',u.id]" *ngIf="u.books > 0" class="text-blue-500">{{
+              u.books }}</a>
+            <span *ngIf="u.books == 0" class="text-white">0</span>
+          </td>
+          <td class="px-6 py-4">
+            <a [routerLink]="['/admin','loan','plist','byuser',u.id]" *ngIf="u.loans > 0" class="text-blue-500">{{
+              u.loans }}</a>
+            <span *ngIf="u.loans == 0" class="text-white">0</span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="inline-flex gap-2">
+              <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','user','view',u.id]">View</button>
+              <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doView(u)">ViewPopUp</button>
+              <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','user','edit',u.id]">Edit</button>
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" *ngIf="u.books == 0 && u.loans == 0" class="btn btn-danger" (click)="doRemove(u)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+<div class="flex justify-center mb-3">
+  <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+    [totalRecords]="oPage?.totalElements || 0"></p-paginator>
+</div>
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
+  <ng-template pTemplate="header">
+    <h5><i class="pi pi-exclamation-triangle p-mr-3 text-red-500" style="font-size: 2rem"></i> User removal
+    </h5>
+  </ng-template>
+  <ng-template pTemplate="message">
+    <div class="flex items-center justify-center">
+      <app-admin-user-detail-unrouted [id]="oUserToRemove!.id"></app-admin-user-detail-unrouted>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p class="text-lg">Are you sure to remove user?</p>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>
