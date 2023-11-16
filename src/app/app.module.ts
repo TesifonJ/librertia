@@ -34,6 +34,26 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
 import { ToastModule } from 'primeng/toast';
+import { AdminBookDetailUnroutedComponent } from './components/book/admin-book-detail-unrouted/admin-book-detail-unrouted.component';
+import { AdminBookEditRoutedComponent } from './components/book/admin-book-edit-routed/admin-book-edit-routed.component';
+import { AdminBookFormUnroutedComponent } from './components/book/admin-book-form-unrouted/admin-book-form-unrouted.component';
+import { AdminBookNewRoutedComponent } from './components/book/admin-book-new-routed/admin-book-new-routed.component';
+import { AdminBookPlistRoutedComponent } from './components/book/admin-book-plist-routed/admin-book-plist-routed.component';
+import { AdminBookPlistUnroutedComponent } from './components/book/admin-book-plist-unrouted/admin-book-plist-unrouted.component';
+import { AdminBookViewRoutedComponent } from './components/book/admin-book-view-routed/admin-book-view-routed.component';
+import { UserBookDetailUnroutedComponent } from './components/book/user-book-detail-unrouted/user-book-detail-unrouted.component';
+import { UserBookFormUnroutedComponent } from './components/book/user-book-form-unrouted/user-book-form-unrouted.component';
+import { UserBookPlistUnroutedComponent } from './components/book/user-book-plist-unrouted/user-book-plist-unrouted.component';
+import { AdminLoanDetailUnroutedComponent } from './components/loan/admin-loan-detail-unrouted/admin-loan-detail-unrouted.component';
+import { AdminLoanEditRoutedComponent } from './components/loan/admin-loan-edit-routed/admin-loan-edit-routed.component';
+import { AdminLoanFormUnroutedComponent } from './components/loan/admin-loan-form-unrouted/admin-loan-form-unrouted.component';
+import { AdminLoanNewRoutedComponent } from './components/loan/admin-loan-new-routed/admin-loan-new-routed.component';
+import { AdminLoanPlistRoutedComponent } from './components/loan/admin-loan-plist-routed/admin-loan-plist-routed.component';
+import { AdminLoanPlistUnroutedComponent } from './components/loan/admin-loan-plist-unrouted/admin-loan-plist-unrouted.component';
+import { AdminLoanViewRoutedComponent } from './components/loan/admin-loan-view-routed/admin-loan-view-routed.component';
+import { UserLoanDetailUnroutedComponent } from './components/loan/user-loan-detail-unrouted/user-loan-detail-unrouted.component';
+import { UserLoanFormUnroutedComponent } from './components/loan/user-loan-form-unrouted/user-loan-form-unrouted.component';
+import { UserLoanPlistUnroutedComponent } from './components/loan/user-loan-plist-unrouted/user-loan-plist-unrouted.component';
 
 
 @NgModule({
@@ -56,7 +76,27 @@ import { ToastModule } from 'primeng/toast';
     AdminUserNewRoutedComponent,
     AdminUserEditRoutedComponent,
     AdminUserDetailUnroutedComponent,
-    AdminUserFormUnroutedComponent
+    AdminUserFormUnroutedComponent,
+    AdminBookDetailUnroutedComponent,
+    AdminBookEditRoutedComponent,
+    AdminBookFormUnroutedComponent,
+    AdminBookNewRoutedComponent,
+    AdminBookPlistRoutedComponent,
+    AdminBookPlistUnroutedComponent,
+    AdminBookViewRoutedComponent,
+    UserBookDetailUnroutedComponent,
+    UserBookFormUnroutedComponent,
+    UserBookPlistUnroutedComponent,
+    AdminLoanDetailUnroutedComponent,
+    AdminLoanEditRoutedComponent,
+    AdminLoanFormUnroutedComponent,
+    AdminLoanNewRoutedComponent,
+    AdminLoanPlistRoutedComponent,
+    AdminLoanPlistUnroutedComponent,
+    AdminLoanViewRoutedComponent,
+    UserLoanDetailUnroutedComponent,
+    UserLoanFormUnroutedComponent,
+    UserLoanPlistUnroutedComponent
   ],
   imports: [
     BrowserModule,
