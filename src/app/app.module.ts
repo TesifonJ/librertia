@@ -9,7 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { FooterUnroutedComponent } from './components/shared/footer-unrouted/footer-unrouted.component';
 import { HomeRoutedComponent } from './components/shared/home-routed/home-routed.component';
-import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
+
 import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-routed.component';
 import { MenuUnroutedComponent } from './components/shared/menu-unrouted/menu-unrouted.component';
 import { NormalUserFeaturedUnroutedComponent } from './components/user/normal-user-featured-unrouted/normal-user-featured-unrouted.component';
@@ -32,6 +32,9 @@ import { BookAjaxService } from './services/thread.ajax.service';
 import { SessionAjaxService } from './services/session.ajax.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
+import { ToastModule } from 'primeng/toast';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     DynamicDialogModule,
     PaginatorModule,
     ConfirmDialogModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    ToastModule
 
   ],
   providers: [

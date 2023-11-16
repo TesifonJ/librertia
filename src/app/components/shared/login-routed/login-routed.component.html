@@ -7,7 +7,8 @@
     </div>
   </div>
 </div>
-
+<div class="card">
+</div>
 <!-- FORMULARIO LOGIN-->
 <div class="flex justify-center">
   <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -20,9 +21,12 @@
             stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
         </svg>
       </span>
-
       <input placeholder="Username" type="text" formControlName="username">
+
+
     </div>
+    <p *ngIf="loginForm.get('username')?.hasError('required')" class="mt-2 text-sm text-red-600 dark:text-red-500">
+      Username required!</p>
     <div class="input-container">
       <span>
         <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
@@ -35,12 +39,15 @@
 
       <input placeholder="Password" type="password" formControlName="password">
     </div>
+    <p *ngIf="loginForm.get('password')?.hasError('required')" class="mt-2 text-sm text-red-600 dark:text-red-500">Password is required</p>
+    <p *ngIf="loginForm.get('password')?.hasError('minlength')" class="mt-2 text-sm text-red-600 dark:text-red-500">Password must be at least 6 characters length</p>
+
     <button class="submit" type="submit">
       Sign in
     </button>
 
     <button class="submit" type="reset" (click)="onReset()">Reset</button>
-    
+
     <p class="text-center">Log in as</p>
     <span class="flex justify-center gap-5">
       <button class="logInAs" (click)="loginAdmin()">Admin</button>
