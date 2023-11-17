@@ -52,14 +52,14 @@ export class LoginRoutedComponent implements OnInit{
 
   loginAdmin() {
     this.loginForm.setValue({
-      username: 'ucarter',
+      username: 'winscott',
       password: 'foxforum'
     })
   }
 
   loginUser() {
     this.loginForm.setValue({
-      username: 'cardoba',
+      username: 'babayaga',
       password: 'foxforum'
     })
   }

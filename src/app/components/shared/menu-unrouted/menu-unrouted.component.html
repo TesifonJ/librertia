@@ -17,36 +17,40 @@
         
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" >Home</a>
+                    <a class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" ><mat-icon class="icon-display scale-150 mb-5">home</mat-icon></a>
                 </li>
                 <li *ngIf="strUserName && oSessionUser?.role==false">
                     <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" [class.active]="strUrl.startsWith('/admin/user')"
-                        routerLink="/admin/user/plist">Users</a>
+                        routerLink="/admin/user/plist"><mat-icon class="icon-display scale-150 mb-5">supervisor_account</mat-icon></a>
                 </li>
                 <li *ngIf="strUserName && oSessionUser?.role==false">
                     <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" [class.active]="strUrl.startsWith('/admin/book')"
-                        routerLink="/admin/book/plist">Books</a>
+                        routerLink="/admin/book/plist"><mat-icon class="icon-display scale-150 mb-5">book</mat-icon></a>
                 </li>
                 <li *ngIf="strUserName && oSessionUser?.role==false">
                     <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" [class.active]="strUrl.startsWith('/admin/loan')"
-                        routerLink="/admin/loan/plist">Loans</a>
+                        routerLink="/admin/loan/plist"><mat-icon class="icon-display scale-150 mb-5">date_range</mat-icon></a>
                 </li>
                 <hr>
                 <li>
                         <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" [class.active]="strUrl.startsWith('/admin/login')" routerLink="/login" *ngIf="!strUserName"
-                            [class.active]="strUrl.startsWith('/login')">Login</a>
+                            [class.active]="strUrl.startsWith('/login')"><mat-icon class="icon-display scale-150 mb-5">login</mat-icon></a>
+                </li>
+
+                <li>
+                    <span class=" text-white " *ngIf="strUserName">
+                        Logged as <a (click)="doSessionUserView($event)" href="#">{{strUserName}}</a>
+                    </span>
+                    <span class=" text-white" *ngIf="!strUserName">
+                        Not logged in
+                    </span>
                 </li>
                 <li>
-                        <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" routerLink="/logout" *ngIf="strUserName"
-                            [class.active]="strUrl.startsWith('/logout')">Logout</a>
-                </li>
+                    <a class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" routerLink="/logout" *ngIf="strUserName"
+                        [class.active]="strUrl.startsWith('/logout')"><mat-icon class="icon-display scale-150 mb-5">exit_to_app</mat-icon></a>
+            </li>
             </ul>
-            <span class=" text-white" *ngIf="strUserName">
-                Logged as <a (click)="doSessionUserView($event)" href="#">{{strUserName}}</a>
-            </span>
-            <span class=" text-white" *ngIf="!strUserName">
-                Not logged in
-            </span>
+
         </div>
 
     </div>

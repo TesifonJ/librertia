@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IUser, formOperation } from 'src/app/model/model.interfaces';
 import { UserAjaxService } from 'src/app/services/user.ajax.service';
@@ -12,7 +13,7 @@ import { UserAjaxService } from 'src/app/services/user.ajax.service';
 })
 export class AdminUserFormUnroutedComponent {
   @Input() id: number = 1;
-  @Input() operation: formOperation = 'NEW'; //new or edit
+  @Input() operation: formOperation = 'NEW';
 
   userForm!: FormGroup;
   oUser: IUser = {} as IUser;
@@ -22,7 +23,7 @@ export class AdminUserFormUnroutedComponent {
     private oFormBuilder: FormBuilder,
     private oUserAjaxService: UserAjaxService,
     private oRouter: Router,
-
+    private oMatSnackBar: MatSnackBar
   ) {
     this.initializeForm(this.oUser);
   }
@@ -32,7 +33,6 @@ export class AdminUserFormUnroutedComponent {
       id: [oUser.id],
       name: [oUser.name, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       surname: [oUser.surname, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      lastname: [oUser.lastname, Validators.maxLength(255)],
       email: [oUser.email, [Validators.required, Validators.email]],
       username: [oUser.username, [Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern('^[a-zA-Z0-9]+$')]],
       role: [oUser.role, Validators.required]
@@ -48,7 +48,7 @@ export class AdminUserFormUnroutedComponent {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          //this.oMatSnackBar.open("Error reading user from server.", '', { duration: 2000 });
+          this.oMatSnackBar.open("Error reading user from server.", '', { duration: 2000 });
         }
       })
     } else {
@@ -67,13 +67,12 @@ export class AdminUserFormUnroutedComponent {
           next: (data: IUser) => {
             this.oUser = data;
             this.initializeForm(this.oUser);
-            // avisar al usuario que se ha creado correctamente
-           // this.oMatSnackBar.open("User has been created.", '', { duration: 2000 });
+            this.oMatSnackBar.open("User has been created.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'user', 'view', this.oUser]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            //this.oMatSnackBar.open("Can't create user.", '', { duration: 2000 });
+            this.oMatSnackBar.open("Can't create user.", '', { duration: 2000 });
           }
         })
 
@@ -82,13 +81,12 @@ export class AdminUserFormUnroutedComponent {
           next: (data: IUser) => {
             this.oUser = data;
             this.initializeForm(this.oUser);
-            // avisar al usuario que se ha actualizado correctamente
-            //this.oMatSnackBar.open("User has been updated.", '', { duration: 2000 });
+            this.oMatSnackBar.open("User has been updated.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'user', 'view', this.oUser.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            //this.oMatSnackBar.open("Can't update user.", '', { duration: 2000 });
+            this.oMatSnackBar.open("Can't update user.", '', { duration: 2000 });
           }
         })
       }

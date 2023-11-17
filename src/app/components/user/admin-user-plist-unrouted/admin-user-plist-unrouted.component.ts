@@ -7,6 +7,7 @@ import { IUser, IUserPage } from 'src/app/model/model.interfaces';
 import { AdminUserDetailUnroutedComponent } from '../admin-user-detail-unrouted/admin-user-detail-unrouted.component';
 import { UserAjaxService } from 'src/app/services/user.ajax.service';
 import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -28,9 +29,9 @@ export class AdminUserPlistUnroutedComponent implements OnInit{
 
   constructor(
     private oUserAjaxService: UserAjaxService,
-    public oDialogService: DialogService,
+    private oDialogService: DialogService,
     private oCconfirmationService: ConfirmationService,
-
+    private oMatSnackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -92,19 +93,19 @@ export class AdminUserPlistUnroutedComponent implements OnInit{
     this.oUserToRemove = u;
     this.oCconfirmationService.confirm({
       accept: () => {
-        //this.oMatSnackBar.open("The user has been removed.", '', { duration: 2000 });
+        this.oMatSnackBar.open("The user has been removed.", '', { duration: 2000 });
         this.oUserAjaxService.removeOne(this.oUserToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            //this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 2000 });
+            this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        //this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 2000 });
+        this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 2000 });
       }
     });
   }
