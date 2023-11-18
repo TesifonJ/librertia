@@ -1,77 +1,81 @@
 <div *ngIf="status!=null">
-    <div class="d-flex justify-content-center my-3">
-      <div class="alert alert-danger" role="alert">
-        {{status!.error.message}} - {{status!.message}}
-      </div>
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{status!.error.message}} - {{status!.message}}
     </div>
   </div>
-  
-  <div *ngIf="status==null">
-    <div class="d-flex justify-content-between mb-3">
-      <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}}) <a type="button"
-          class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','book','plist']">reset filter</a></h3>
-      <h3 *ngIf="!(id_user>0)">No active filter</h3>
-      <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} Books.</h3>
-    </div>
-    <div class="flex justify-content-center mb-3">
-      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-        [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-    </div>
-  
-  
-    <div class="mb-5 ">
-      <table class="table table-bordered table-striped table-hover table-sm">
-        <thead>
-          <tr>
-            <th (click)="doOrder('id')">ID</th>
-            <th (click)="doOrder('title')">Title</th>
-            <th (click)="doOrder('user')">User</th>
-            <th>Number of loans</th>
-            <th>Tools</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let b of oPage?.content" class="align-middle">
-            <td class="text-end"><strong>{{b.id}}</strong></td>
-            <td>{{b.title}}</td>
-            <td>
-              <!-- handle if user is null -->
-              <!-- <a  [routerLink]="['/admin','book','plist','byuser',b.user.id]">({{b.user.id}}) {{b.user.name}}
+</div>
+
+<div *ngIf="status==null">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}}) 
+      <a type="button" class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','book','plist']">reset filter</a>
+    </h3>
+
+    <h3 *ngIf="!(id_user>0)">No active filter</h3>
+
+    <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} Books.</h3>
+  </div>
+  <div class="flex justify-content-center mb-3">
+    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+    <table class="w-full 1sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('title')">Title</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('user')">User</th>
+          <th scope="col" class="px-6 py-3">Number of loans</th>
+          <th scope="col" class="px-6 py-3">Tools</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let b of oPage?.content" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
+          <td scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">{{b.id}}</td>
+          
+          <td class="px-6 py-4 text-white">{{b.title}}</td>
+          
+          <td class="px-6 py-4 text-white">
+            <!-- handle if user is null -->
+            <!-- <a  [routerLink]="['/admin','book','plist','byuser',b.user.id]">({{b.user.id}}) {{b.user.name}}
                 {{b.user.surname}}</a> -->
-            </td>
-            <td class="text-center">
-              <a [routerLink]="['/admin','reply','plist','byBook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
-              <span *ngIf="b.loans==0">0</span>
-            </td>
-            <td class="text-center">
-              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                <button class="btn btn-primary" [routerLink]="['/admin','Book','view',b.id]"><i
-                    class="pi pi-eye"></i></button>
-                <button class="btn btn-primary" (click)="doView(b)"><i class="pi pi-arrow-circle-up"></i></button>
-                <button class="btn btn-warning" [routerLink]="['/admin','Book','edit',b.id]"><i
-                    class="pi pi-pencil"></i></button>
-                <button *ngIf="b.loans==0" class="btn btn-danger" (click)="doRemove(b)"><i
-                    class="pi pi-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+          </td>
+          <td class="px-6 py-4 text-white">
+            <a [routerLink]="['/admin','reply','plist','byBook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
+            <span *ngIf="b.loans==0">0</span>
+          </td>
+
+          <td class="px-6 py-4 text-white text-center">
+            <div  class="inline-flex gap-2" role="group">
+              <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','view',b.id]">VIEW</button>
+              <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doView(b)">VIEWP</button>
+              <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','edit',b.id]">EDIT</button>
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" *ngIf="b.loans==0" (click)="doRemove(b)">REMOVE</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
-  <p-confirmDialog #cd [style]="{ width: '30vw' }">
-    <ng-template pTemplate="header">
-      <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Book removal</h5>
-    </ng-template>
-    <ng-template pTemplate="message">
-      <div class="container d-flex align-items-center justify-content-center">
-        <app-admin-book-detail-unrouted [id]="oBookToRemove!.id"></app-admin-book-detail-unrouted>
-      </div>
-    </ng-template>
-    <ng-template pTemplate="footer">
-      <p>¿Are you sure to remove Book?</p>
-      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
-    </ng-template>
-  </p-confirmDialog>
+</div>
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
+  <ng-template pTemplate="header">
+    <h5 class="text-2xl font-bold"><i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i> Book Removal</h5>
+  </ng-template>
+  <ng-template pTemplate="message">
+    <div class="container flex items-center justify-center">
+      <app-admin-book-detail-unrouted [id]="oBookToRemove!.id"></app-admin-book-detail-unrouted>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p class="mb-4">Are you sure to remove the book?</p>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2" pButton icon="pi pi-times" (click)="cd.reject()">No</button>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" pButton icon="pi pi-check" (click)="cd.accept()">Yes</button>
+  </ng-template>
+</p-confirmDialog>

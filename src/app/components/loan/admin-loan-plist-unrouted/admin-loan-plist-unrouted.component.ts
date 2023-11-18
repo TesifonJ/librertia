@@ -19,12 +19,12 @@ import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 })
 export class AdminLoanPlistUnroutedComponent {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() id_user: number = 0; //filter by user
-  @Input() id_book: number = 0; //filter by Book
+  @Input() id_user: number = 0;
+  @Input() id_book: number = 0;
 
   oPage: ILoanPage | undefined;
-  oUser: IUser | null = null; // data of user if id_user is set for filter
-  oBook: IBook | null = null; // data of Book if id_Book is set for filter
+  oUser: IUser | null = null;
+  oBook: IBook | null = null;
   orderField: string = "id";
   orderDirection: string = "asc";
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };

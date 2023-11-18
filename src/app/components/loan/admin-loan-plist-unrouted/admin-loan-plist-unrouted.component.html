@@ -8,13 +8,17 @@
   
   <div *ngIf="status==null">
     <div class="d-flex justify-content-between mb-3">
-      <h3 *ngIf="id_book>0">Filtered by book ({{id_book}} - {{oBook?.title | trimming}}) <a type="button"
-          class="btn btn-danger btn-sm" *ngIf="id_book>0" [routerLink]="['/admin','loan','plist']">reset filter</a>
+      <h3 *ngIf="id_book>0">Filtered by book ({{id_book}} - {{oBook?.title | trimming}})
+        <button [routerLink]="['/admin','loan','plist']">reset filter</button>
       </h3>
-      <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}}) <a type="button"
-          class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','loan','plist']">reset filter</a></h3>
+      <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}})
+        <button [routerLink]="['/admin','loan','plist']">reset filter</button>
+      </h3>
+
       <h3 *ngIf="!(id_user>0)&&!(id_book>0)">No active filter</h3>
+
       <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} replies</h3>
+   
     </div>
     <div class="flex justify-content-center mb-3">
       <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
@@ -26,11 +30,11 @@
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th (click)="doOrder('id')" scope="col" class="px-6 py-3" >ID</th>
-            <th (click)="doOrder('book')" scope="col" class="px-6 py-3">book</th>
-            <th (click)="doOrder('user')" scope="col" class="px-6 py-3">User</th>          
-            <th (click)="doOrder('loanDate')" scope="col" class="px-6 py-3">Loan Date</th>
-            <th (click)="doOrder('dueDate')" scope="col" class="px-6 py-3">Due Date</th>
+            <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
+            <th scope="col" class="px-6 py-3" (click)="doOrder('book')">book</th>
+            <th scope="col" class="px-6 py-3" (click)="doOrder('user')">User</th>          
+            <th scope="col" class="px-6 py-3" (click)="doOrder('loanDate')">Loan Date</th>
+            <th scope="col" class="px-6 py-3" (click)="doOrder('dueDate')">Due Date</th>
             <th scope="col" class="px-6 py-3">Tools</th>
           </tr>
         </thead>
@@ -57,12 +61,12 @@
             
             <td class="px-6 py-4 text-white" pTooltip="{{l.dueDate}}" >{{l.dueDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
             
-            <td class="text-center ">
-              <div class="btn-group btn-group-sm text-white" role="group">
-                <button class="btn btn-primary" [routerLink]="['/admin','loan','view',l.id]">VIEW</button>
-                <button class="btn btn-primary" (click)="doView(l)">VIEWP</button>
-                <button class="btn btn-warning" [routerLink]="['/admin','loan','edit',l.id]">EDIT</button>
-                <button class="btn btn-danger" (click)="doRemove(l)">REMOVE</button>
+            <td class="text-center">
+              <div class="inline-flex gap-2" role="group">
+                <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','view',l.id]">VIEW</button>
+                <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  (click)="doView(l)">VIEWP</button>
+                <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','edit',l.id]">EDIT</button>
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doRemove(l)">REMOVE</button>
               </div>
             </td>
           </tr>
@@ -74,16 +78,17 @@
   
   <p-confirmDialog #cd [style]="{ width: '30vw' }">
     <ng-template pTemplate="header">
-      <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> loan removal</h5>
+      <h5 class="text-2xl font-bold"><i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i> Loan Removal</h5>
     </ng-template>
     <ng-template pTemplate="message">
-      <div class="container d-flex align-items-center justify-content-center">
+      <div class="container flex items-center justify-center">
         <app-admin-loan-detail-unrouted [id]="oLoanToRemove!.id"></app-admin-loan-detail-unrouted>
       </div>
     </ng-template>
     <ng-template pTemplate="footer">
-      <p>¿Are you sure to remove loan?</p>
-      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+      <p class="mb-4">Are you sure to remove the loan?</p>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded mr-2" pButton icon="pi pi-times" (click)="cd.reject()">No</button>
+      <button class="bg-red-500 text-white px-4 py-2 rounded" pButton icon="pi pi-check" (click)="cd.accept()">Yes</button>
     </ng-template>
   </p-confirmDialog>
+  
