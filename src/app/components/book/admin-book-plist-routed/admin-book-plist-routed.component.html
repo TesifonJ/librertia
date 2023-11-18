@@ -1,4 +1,4 @@
-<div class="container mx-auto ">
+<div class="container mx-auto">
     <div class="flex justify-center">
         <div class="col">
             <div class="flex justify-center items-center">
@@ -35,9 +35,9 @@
                     (click)="doEmpty($event)">Empty</a>
             </div>
         </div>
-        </div>
-        
-        <app-admin-book-plist-unrouted [forceReload]="forceReload" [id_user]="id_user" *ngIf="!bLoading"></app-admin-book-plist-unrouted>
     </div>
 
-    <p-confirmPopup></p-confirmPopup>
+    <app-admin-book-plist-unrouted [forceReload]="forceReload" [id_user]="id_user"
+        *ngIf="!bLoading"></app-admin-book-plist-unrouted>
+</div>
+<p-confirmPopup></p-confirmPopup>
