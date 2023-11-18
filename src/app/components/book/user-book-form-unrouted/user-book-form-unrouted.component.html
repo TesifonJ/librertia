@@ -1,1 +1,36 @@
-<p>user-book-form-unrouted works!</p>
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+      <div class="alert alert-danger" role="alert">
+        {{status!.error.message}} - {{status!.message}}
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="status==null">
+    <div class="col-12">
+      <div class="d-flex justify-content-center my-3">
+        <form [formGroup]="BookForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <mat-form-field *ngIf="operation=='EDIT'">
+              <mat-label>ID:</mat-label>
+              <input matInput formControlName="id" placeholder="ID" required readonly>
+              <mat-hint align="end">(can't change this number)</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field [style.width.px]=350>
+              <mat-label>Title:</mat-label>
+              <input matInput formControlName="title" placeholder="Title" required>
+              <mat-hint align="end">(10 to 2048 characters long)</mat-hint>
+              <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+              <mat-error *ngIf="hasError('title', 'minlength')">More length is required</mat-error>
+              <mat-error *ngIf="hasError('title', 'maxlength')">Limit exceed</mat-error>
+            </mat-form-field>
+          </div>  
+          <div class="text-center mt-5">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!BookForm.valid">Save book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

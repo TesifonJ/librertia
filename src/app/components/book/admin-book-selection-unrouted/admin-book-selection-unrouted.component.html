@@ -1,1 +1,64 @@
-<p>admin-book-selection-unrouted works!</p>
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+      <div class="alert alert-danger" role="alert">
+        {{status!.error.message}} - {{status!.message}}
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="status==null">
+    <div class="d-flex justify-content-between mb-3">
+      <h3 *ngIf="id_user>0">Filtered by user ({{id_user}})</h3>
+      <h3 *ngIf="!(id_user>0)">No active filter</h3>
+      <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} Books.</h3>
+    </div>
+    <div class="flex justify-content-center mb-3">
+      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+        [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    </div>
+  
+  
+    <div class="mb-5 ">
+      <table class="table table-bordered table-striped table-hover table-sm">
+        <thead>
+          <tr>
+            <th (click)="doOrder('id')">ID</th>
+            <th (click)="doOrder('title')">Title</th>
+            <th (click)="doOrder('user')">User</th>
+            <th>Number of replies</th>
+            <th>Tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of oPage?.content" class="align-middle">
+            <td class="text-end"><strong>{{b.id}}</strong></td>
+            <td>{{b.title}}</td>
+            <td>{{b.user.name}}</td>
+            <td class="text-center">{{b.loans}} </td>
+            <td class="text-center">
+              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <button class="btn btn-primary" (click)="onSelectBook(b)"><i class="pi pi-plus-circle"></i></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  <p-confirmDialog #cd [style]="{ width: '30vw' }">
+    <ng-template pTemplate="header">
+      <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Book removal</h5>
+    </ng-template>
+    <ng-template pTemplate="message">
+      <div class="container d-flex align-items-center justify-content-center">
+        <app-admin-book-detail-unrouted [id]="oBookToRemove!.id"></app-admin-book-detail-unrouted>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p>¿Are you sure to remove Book?</p>
+      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>

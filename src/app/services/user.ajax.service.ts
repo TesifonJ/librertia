@@ -47,10 +47,10 @@ export class UserAjaxService {
         return this.oHttpClient.post<number>(this.sUrl + "/populate/" + amount, null);
     }
 
-    getPageByRepliesNumberDesc(size: number | undefined, page: number | undefined): Observable<IUserPage> {
+    getPageByLoansNumberDesc(size: number | undefined, page: number | undefined): Observable<IUserPage> {
         if (!size) size = 10;
         if (!page) page = 0;
-        return this.oHttpClient.get<IUserPage>(this.sUrl + "/byRepliesNumberDesc?size=" + size + "&page=" + page);
+        return this.oHttpClient.get<IUserPage>(this.sUrl + "/byLoansNumberDesc?size=" + size + "&page=" + page);
     }
 
     empty(): Observable<number> {

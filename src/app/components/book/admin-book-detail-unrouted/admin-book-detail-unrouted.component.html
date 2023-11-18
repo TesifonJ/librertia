@@ -1,1 +1,39 @@
-<p>admin-book-detail-unrouted works!</p>
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+        <div class="alert alert-danger" role="alert">
+            {{status!.error.message}} - {{status!.message}}
+        </div>
+    </div>
+</div>
+
+<div *ngIf="status==null">
+    <table class="table table-striped table-hover">
+        <tbody>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <th>id</th>
+                <td>{{oBook.id}}</td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td>{{oBook.title}}</td>
+            </tr>
+            <tr>
+                <th>user</th>
+                <td> <a [routerLink]="['/admin','user','view',oBook.user.id]">{{oBook.user.name}}
+                        {{oBook.user.surname}}</a></td>
+            </tr>
+            <tr>
+                <th>loans</th>
+                <td>
+                    <a [routerLink]="['/admin','reply','plist','byBook',oBook.id]"
+                        *ngIf="oBook.loans>0">{{oBook.loans}}</a>
+                    <span *ngIf="oBook.loans==0 || oBook.loans == null">0</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

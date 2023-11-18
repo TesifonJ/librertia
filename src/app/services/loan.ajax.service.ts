@@ -17,19 +17,19 @@ export class LoanAjaxService {
         return this.oHttpClient.get<ILoan>(this.sUrl + "/" + id);
     }
 
-    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_user: number, id_thread: number): Observable<ILoanPage> {
+    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_user: number, id_Book: number): Observable<ILoanPage> {
         if (!size) size = 10;
         if (!page) page = 0;
         let strUrlUser = "";
         if (id_user > 0) {
             strUrlUser = "&user=" + id_user;
         }
-        let strUrlThread = "";
-        if (id_thread > 0) {
-            strUrlThread = "&thread=" + id_thread;
+        let strUrlBook = "";
+        if (id_Book > 0) {
+            strUrlBook = "&Book=" + id_Book;
         }
 
-        return this.oHttpClient.get<ILoanPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUser + strUrlThread);
+        return this.oHttpClient.get<ILoanPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUser + strUrlBook);
     }
 
     removeOne(id: number | undefined): Observable<number> {
@@ -40,12 +40,12 @@ export class LoanAjaxService {
         }
     }
 
-    newOne(oThread: ILoan): Observable<ILoan> {
-        return this.oHttpClient.post<ILoan>(this.sUrl, oThread);
+    newOne(oBook: ILoan): Observable<ILoan> {
+        return this.oHttpClient.post<ILoan>(this.sUrl, oBook);
     }
 
-    updateOne(oThread: ILoan): Observable<ILoan> {
-        return this.oHttpClient.put<ILoan>(this.sUrl, oThread);
+    updateOne(oBook: ILoan): Observable<ILoan> {
+        return this.oHttpClient.put<ILoan>(this.sUrl, oBook);
     }
 
     generateRandom(amount: number): Observable<number> {

@@ -25,7 +25,7 @@ export class NormalUserFeaturedUnroutedComponent {
   }
 
   getPage(): void {
-    this.oUserAjaxService.getPageByRepliesNumberDesc(this.oPaginatorState.rows, this.oPaginatorState.page).subscribe({
+    this.oUserAjaxService.getPageByLoansNumberDesc(this.oPaginatorState.rows, this.oPaginatorState.page).subscribe({
       next: (data: IUserPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;

@@ -6,7 +6,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoanAjaxService } from 'src/app/services/loan.ajax.service';
-import { BookAjaxService } from 'src/app/services/thread.ajax.service';
+import { BookAjaxService } from 'src/app/services/book.ajax.service';
 import { UserAjaxService } from 'src/app/services/user.ajax.service';
 import { Subject } from 'rxjs';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';

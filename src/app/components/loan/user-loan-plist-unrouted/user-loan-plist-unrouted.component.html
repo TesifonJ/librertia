@@ -1,1 +1,63 @@
-<p>user-loan-plist-unrouted works!</p>
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+      <div class="alert alert-danger" role="alert">
+        {{status!.error.message}} - {{status!.message}}
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="status==null">
+    <div class="d-flex justify-content-between">
+      <button type="button" class="btn btn-outline-primary" (click)="postNewBook()"
+        *ngIf="oSessionService.isSessionActive()">Post new book</button>
+      <h5 class="px-2">Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} loans</h5>
+      <button type="button" class="btn btn-outline-primary" (click)="postNewLoan()"
+        *ngIf="oSessionService.isSessionActive()">Make new Loan</button>
+    </div>
+    <div class="d-flex justify-content-center m-1">
+      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+        [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="" [showPageLinks]="false"></p-paginator>
+    </div>
+  
+    <div class="m-1">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let l of oPage?.content">
+          <div class="d-flex flex-column">
+            <div class="d-flex justify-content-between my-3">
+              <div class="badge bg-yellow-600" *ngIf="l.user.username!=oSessionService.getUsername()">
+                {{l.user.username}}
+              </div>
+              <div class="badge  bg-red-600" *ngIf="l.user.username==oSessionService.getUsername()">
+                {{l.user.username}}
+              </div>
+              <div class="badge text-bg-secondary">{{l.dueDate | date:'dd/MM/yyyy'}}</div>
+            </div>
+
+            <div class="d-flex justify-content-center my-2">
+              <button type="button" class="btn  btn-sm btn-outline-danger" (click)="doRemove(l)"
+                *ngIf="l.user.username==oSessionService.getUsername()">Remove</button>
+            </div>
+          </div>
+  
+        </li>
+      </ul>
+  
+    </div>
+  </div>
+  
+  
+  <p-confirmDialog #cd2 [style]="{ width: '30vw' }">
+    <ng-template pTemplate="header">
+      <h5> Loan removal</h5>
+    </ng-template>
+    <ng-template pTemplate="message">
+      <div class="container d-flex align-items-center justify-content-center">
+        <app-user-loan-detail-unrouted [id]="oLoanToRemove!.id"></app-user-loan-detail-unrouted>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p>¿Are you sure to remove Loan?</p>
+      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd2.reject()"></button>
+      <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd2.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>

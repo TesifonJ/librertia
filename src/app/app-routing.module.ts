@@ -11,6 +11,10 @@ import { AdminLoanPlistRoutedComponent } from './components/loan/admin-loan-plis
 import { AdminLoanViewRoutedComponent } from './components/loan/admin-loan-view-routed/admin-loan-view-routed.component';
 import { AdminLoanNewRoutedComponent } from './components/loan/admin-loan-new-routed/admin-loan-new-routed.component';
 import { AdminLoanEditRoutedComponent } from './components/loan/admin-loan-edit-routed/admin-loan-edit-routed.component';
+import { AdminBookPlistRoutedComponent } from './components/book/admin-book-plist-routed/admin-book-plist-routed.component';
+import { AdminBookViewRoutedComponent } from './components/book/admin-book-view-routed/admin-book-view-routed.component';
+import { AdminBookNewRoutedComponent } from './components/book/admin-book-new-routed/admin-book-new-routed.component';
+import { AdminBookEditRoutedComponent } from './components/book/admin-book-edit-routed/admin-book-edit-routed.component';
 
 const routes: Routes = [
   //Shared
@@ -24,7 +28,10 @@ const routes: Routes = [
   { path: 'admin/user/new', component: AdminUserNewRoutedComponent },
   { path: 'admin/user/edit/:id', component: AdminUserEditRoutedComponent },
   //Book 
-
+  { path: 'admin/book/plist', component: AdminBookPlistRoutedComponent },
+  { path: 'admin/book/view/:id', component: AdminBookViewRoutedComponent },    
+  { path: 'admin/book/new', component: AdminBookNewRoutedComponent },
+  { path: 'admin/book/edit/:id', component: AdminBookEditRoutedComponent },
   //Loan
   { path: 'admin/loan/plist', component: AdminLoanPlistRoutedComponent },
   { path: 'admin/loan/view/:id', component: AdminLoanViewRoutedComponent },    

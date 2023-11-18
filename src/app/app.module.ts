@@ -28,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserAjaxService } from './services/user.ajax.service';
 import { LoanAjaxService } from './services/loan.ajax.service';
-import { BookAjaxService } from './services/thread.ajax.service';
+import { BookAjaxService } from './services/book.ajax.service';
 import { SessionAjaxService } from './services/session.ajax.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -41,7 +41,6 @@ import { AdminBookNewRoutedComponent } from './components/book/admin-book-new-ro
 import { AdminBookPlistRoutedComponent } from './components/book/admin-book-plist-routed/admin-book-plist-routed.component';
 import { AdminBookPlistUnroutedComponent } from './components/book/admin-book-plist-unrouted/admin-book-plist-unrouted.component';
 import { AdminBookViewRoutedComponent } from './components/book/admin-book-view-routed/admin-book-view-routed.component';
-import { UserBookDetailUnroutedComponent } from './components/book/user-book-detail-unrouted/user-book-detail-unrouted.component';
 import { UserBookFormUnroutedComponent } from './components/book/user-book-form-unrouted/user-book-form-unrouted.component';
 import { UserBookPlistUnroutedComponent } from './components/book/user-book-plist-unrouted/user-book-plist-unrouted.component';
 import { AdminLoanDetailUnroutedComponent } from './components/loan/admin-loan-detail-unrouted/admin-loan-detail-unrouted.component';
@@ -97,7 +96,7 @@ import { TableModule } from 'primeng/table';
     AdminBookPlistRoutedComponent,
     AdminBookPlistUnroutedComponent,
     AdminBookViewRoutedComponent,
-    UserBookDetailUnroutedComponent,
+
     UserBookFormUnroutedComponent,
     UserBookPlistUnroutedComponent,
     AdminLoanDetailUnroutedComponent,
