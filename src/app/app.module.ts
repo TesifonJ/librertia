@@ -66,6 +66,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TableModule } from 'primeng/table';
+import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-featured-unrouted/user-book-featured-unrouted.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,12 @@ import { TableModule } from 'primeng/table';
     //Normal User
     NormalUserFeaturedUnroutedComponent,
     NormalUserDetailUnroutedComponent,
+    //User Book
+    UserBookFormUnroutedComponent,
+    UserBookPlistUnroutedComponent,
+    UserBookFeaturedUnroutedComponent,
+    //Admin Book
+    AdminBookSelectionUnroutedComponent,
     //Admin User
     AdminUserViewRoutedComponent,
     AdminUserSelectionUnroutedComponent,
@@ -96,9 +103,7 @@ import { TableModule } from 'primeng/table';
     AdminBookPlistRoutedComponent,
     AdminBookPlistUnroutedComponent,
     AdminBookViewRoutedComponent,
-
-    UserBookFormUnroutedComponent,
-    UserBookPlistUnroutedComponent,
+    //Admin Loan
     AdminLoanDetailUnroutedComponent,
     AdminLoanEditRoutedComponent,
     AdminLoanFormUnroutedComponent,
@@ -106,10 +111,12 @@ import { TableModule } from 'primeng/table';
     AdminLoanPlistRoutedComponent,
     AdminLoanPlistUnroutedComponent,
     AdminLoanViewRoutedComponent,
+    //User Loan
     UserLoanDetailUnroutedComponent,
     UserLoanFormUnroutedComponent,
     UserLoanPlistUnroutedComponent,
-    AdminBookSelectionUnroutedComponent
+
+    
   ],
   imports: [
     BrowserModule,

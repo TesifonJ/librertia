@@ -9,7 +9,7 @@ import { BookAjaxService } from 'src/app/services/book.ajax.service';
 @Component({
   selector: 'app-user-book-featured-unrouted',
   templateUrl: './user-book-featured-unrouted.component.html',
-  styleUrls: ['./user-book-featured-unrouted.component.css']
+  styleUrls: ['./user-book-featured-unrouted.component.scss']
 })
 export class UserBookFeaturedUnroutedComponent implements OnInit {
 
