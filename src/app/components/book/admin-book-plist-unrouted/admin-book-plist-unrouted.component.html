@@ -28,7 +28,7 @@
         <tr>
           <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
           <th scope="col" class="px-6 py-3" (click)="doOrder('title')">Title</th>
-          <th scope="col" class="px-6 py-3" (click)="doOrder('user')">User</th>
+          <th scope="col" class="px-6 py-3" (click)="doOrder('user')">Owner User</th>
           <th scope="col" class="px-6 py-3">Number of loans</th>
           <th scope="col" class="px-6 py-3">Tools</th>
         </tr>
@@ -41,9 +41,10 @@
           <td class="px-6 py-4 text-white">{{b.title}}</td>
           
           <td class="px-6 py-4 text-white">
-            <!-- handle if user is null -->
-            <!-- <a  [routerLink]="['/admin','book','plist','byuser',b.user.id]">({{b.user.id}}) {{b.user.name}}
-                {{b.user.surname}}</a> -->
+            
+            <a  *ngIf="b.user != null" [routerLink]="['/admin','book','plist','byuser',b.user.id]">({{b.user.id}}) {{b.user.username}}</a>
+
+            <span class="text-red-400 font-medium" *ngIf="b.user == null">NO USER</span>
           </td>
           <td class="px-6 py-4 text-white">
             <a [routerLink]="['/admin','reply','plist','byBook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>

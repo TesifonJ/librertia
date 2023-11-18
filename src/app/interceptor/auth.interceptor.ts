@@ -11,7 +11,7 @@ export class AuthInterceptor implements HttpInterceptor {
         private oSessionService: SessionAjaxService
     ) { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<void>, next: HttpHandler): Observable<HttpEvent<void>> {
         
         if (this.oSessionService.isSessionActive()) {
             const token = this.oSessionService.getToken();
