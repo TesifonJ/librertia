@@ -6,56 +6,83 @@
     </div>
 </div>
 
-<div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Property</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <th>id</th>
-                <td>{{oUser.id}}</td>
-            </tr>
-            <tr>
-                <th>name</th>
-                <td>{{oUser.name}}</td>
-            </tr>
-            <tr>
-                <th>surname</th>
-                <td>{{oUser.surname}}</td>
-            </tr>
-            <tr>
-                <th>email</th>
-                <td>{{oUser.email}}</td>
-            </tr>
-            <tr>
-                <th>username</th>
-                <td>{{oUser.username}}</td>
-            </tr>
-            <tr>
-                <th>role</th>
-                <td>
-                    <span *ngIf="oUser.role==true">Admin</span>
-                    <span *ngIf="oUser.role==false">User</span>
-                </td>
-            </tr>
-            <tr>
-                <th>books</th>
-                <td>
-                    <a [routerLink]="['/admin','book','plist','byuser',oUser.id]"
-                        *ngIf="oUser.books>0">{{oUser.books}}</a>
-                    <span *ngIf="oUser.books==0">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>loans</th>
-                <td>
-                    <a [routerLink]="['/admin','loan','plist','byuser',oUser.id]"
-                        *ngIf="oUser.loans>0">{{oUser.loans}}</a>
-                    <span *ngIf="oUser.loans==0">0</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="bg-slate-700 flex justify-center items-center">
+    <div class="card flex flex-col w-full max-w-sm ">
+        <div class="p-4">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown"
+                class="float-right text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 16 3">
+                    <path
+                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                </svg>
+            </button>
+
+            <div id="dropdown"
+                class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                        <a
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                    </li>
+                    <li>
+                        <a
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Export
+                            Data</a>
+                    </li>
+                    <li>
+                        <a
+                            class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div class="mx-2">
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                    src="https://bulma.io/images/placeholders/128x128.png" alt="User image" />
+            </div>
+
+            <div class="flex flex-col">
+                <span class="text-gray-900 dark:text-white">[{{oUser.id}}]
+                    {{oUser.name}}&nbsp;{{oUser.surname}}
+                </span>
+
+
+
+                <span class="text-sm text-white">
+                    Role:
+                    <span *ngIf="oUser.role == false" class="text-red-500">
+                        Admin
+                    </span>
+
+                    <span *ngIf="oUser.role == true" class="text-blue-500">
+                        User
+                    </span>
+                </span>
+
+                <a [routerLink]="['/admin','book','plist','byuser',oUser.id]" *ngIf="oUser.numberOfBooks > 0"
+                    class="text-blue-500">
+                    See Books: {{oUser.numberOfBooks}}
+                </a>
+
+                <span *ngIf="oUser.numberOfBooks == 0" class="text-white">See Books: 0</span>
+
+                <a [routerLink]="['/admin','loan','plist','byuser',oUser.id]" *ngIf="oUser.numberOfLoans > 0"
+                    class="text-blue-500">
+                    See Loans: {{oUser.numberOfLoans}}
+                </a>
+                <span *ngIf="oUser.numberOfLoans == 0" class="text-gray-500">See Loans: 0</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col ms-5">
+            <span class="text-sm dark:text-white">@{{oUser.username}}</span>
+            <span class="text-sm dark:text-white">{{oUser.email}}</span>
+        </div>
+
+
+    </div>
 </div>

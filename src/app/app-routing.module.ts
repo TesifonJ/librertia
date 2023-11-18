@@ -29,13 +29,16 @@ const routes: Routes = [
   { path: 'admin/user/edit/:id', component: AdminUserEditRoutedComponent },
   //Book 
   { path: 'admin/book/plist', component: AdminBookPlistRoutedComponent },
+  { path: 'admin/book/plist/byuser/:id', component: AdminBookPlistRoutedComponent },
   { path: 'admin/book/view/:id', component: AdminBookViewRoutedComponent },    
-  { path: 'admin/book/new', component: AdminBookNewRoutedComponent },
-  { path: 'admin/book/edit/:id', component: AdminBookEditRoutedComponent },
+  { path: 'admin/book/new', component: AdminBookNewRoutedComponent },  
+  { path: 'admin/book/edit/:id', component: AdminBookEditRoutedComponent }, 
   //Loan
   { path: 'admin/loan/plist', component: AdminLoanPlistRoutedComponent },
+  { path: 'admin/loan/plist/byuser/:iduser', component: AdminLoanPlistRoutedComponent },  
+  { path: 'admin/loan/plist/bybook/:idbook', component: AdminLoanPlistRoutedComponent },  
   { path: 'admin/loan/view/:id', component: AdminLoanViewRoutedComponent },    
-  { path: 'admin/loan/new', component: AdminLoanNewRoutedComponent },
+  { path: 'admin/loan/new', component: AdminLoanNewRoutedComponent},  
   { path: 'admin/loan/edit/:id', component: AdminLoanEditRoutedComponent },
   //--
 ];

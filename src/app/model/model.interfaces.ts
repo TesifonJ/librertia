@@ -42,12 +42,11 @@ export interface IEntity {
 export interface IUser extends IEntity {
     name: string,
     surname: string,
-    lastname: string,
-    email: string,
     username: string,
+    email: string,
     role: boolean,
-    books: number,
-    loans: number
+    numberOfBooks: number,
+    numberOfLoans: number
 }
 
 export interface IUserPage extends IPage<IUser> {
@@ -55,7 +54,10 @@ export interface IUserPage extends IPage<IUser> {
 
 export interface IBook extends IEntity {
     title: string,
-    user: IUser,
+    author: string,
+    category: string,
+    available: boolean,
+    ownerUser: IUser,
     loans: number
 }
 

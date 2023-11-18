@@ -8,9 +8,9 @@
 
 <div *ngIf="status==null">
   <div class="flex justify-center">
-    <div class="shadow-lg bg-gray-800 p-10 rounded-3xl bg-opacity-95 text-xl">
+    <div class="shadow-lg bg-gray-800 p-16 rounded-3xl bg-opacity-95 text-xl">
       <div>
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="flex flex-col w-64">
           <mat-form-field *ngIf="operation=='EDIT'">
             <mat-label>ID:</mat-label>
             <input matInput formControlName="id" placeholder="ID" required readonly>

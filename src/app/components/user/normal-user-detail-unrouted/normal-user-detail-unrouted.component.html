@@ -11,7 +11,7 @@
         <tbody>
             <tr>
                 <th>name</th>
-                <td>{{oUser.name}} {{oUser.surname}} {{oUser.lastname}}</td>
+                <td>{{oUser.name}} {{oUser.surname}}</td>
             </tr>
             <tr>
                 <th>email</th>
@@ -31,15 +31,15 @@
             <tr>
                 <th>books</th>
                 <td>
-                    <span *ngIf="oUser.books>0">{{oUser.books}}</span>
-                    <span *ngIf="oUser.books==0">0</span>
+                    <span *ngIf="oUser.numberOfBooks>0">{{oUser.numberOfBooks}}</span>
+                    <span *ngIf="oUser.numberOfBooks==0">0</span>
                 </td>
             </tr>
             <tr>
                 <th>loans</th>
                 <td>
-                    <span *ngIf="oUser.loans>0">{{oUser.loans}}</span>
-                    <span *ngIf="oUser.loans==0">0</span>
+                    <span *ngIf="oUser.numberOfLoans>0">{{oUser.numberOfLoans}}</span>
+                    <span *ngIf="oUser.numberOfLoans==0">0</span>
                 </td>
             </tr>
         </tbody>

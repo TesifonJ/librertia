@@ -11,7 +11,7 @@
     <div class=" d-flex">
       <ol>
         <li *ngFor="let u of oPage?.content">
-          {{u.name}} {{u.surname}} ({{u.username}}&nbsp;: {{u.loans}} <a *ngIf="u.loans == null"> Loan a book! </a>)
+          {{u.name}} {{u.surname}} ({{u.username}}&nbsp;: {{u.numberOfLoans}} <a *ngIf="u.numberOfLoans == null"> Loan a book! </a>)
         </li>
       </ol>
     </div>

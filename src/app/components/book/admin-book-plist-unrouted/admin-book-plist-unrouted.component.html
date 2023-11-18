@@ -26,31 +26,42 @@
     <table class="w-full 1sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
-          <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
-          <th scope="col" class="px-6 py-3" (click)="doOrder('title')">Title</th>
-          <th scope="col" class="px-6 py-3" (click)="doOrder('user')">Owner User</th>
-          <th scope="col" class="px-6 py-3">Number of loans</th>
-          <th scope="col" class="px-6 py-3">Tools</th>
+          <th class="px-6 py-3" (click)="doOrder('id')">ID</th>
+          <th class="px-6 py-3" (click)="doOrder('title')">Title</th>
+          <th class="px-6 py-3" (click)="doOrder('author')">Author</th>
+          <th class="px-6 py-3" (click)="doOrder('category')">Category</th>
+          <th class="px-6 py-3" (click)="doOrder('available')">Available</th>
+          <th class="px-6 py-3" (click)="doOrder('ownerUser')">Owner User</th>
+          <th class="px-6 py-3">Number of loans</th>
+          <th class="px-6 py-3">Tools</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let b of oPage?.content" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
-          <td scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">{{b.id}}</td>
-          
+          <!--ID -->
+          <td class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">{{b.id}}</td>
+          <!--Title -->
           <td class="px-6 py-4 text-white">{{b.title}}</td>
-          
+          <!--Author -->
+          <td class="px-6 py-4 text-white">{{b.author}}</td>
+          <!--Category -->
+          <td class="px-6 py-4 text-white">{{b.category}}</td>
+          <!--Avalaible -->
           <td class="px-6 py-4 text-white">
-            
-            <a  *ngIf="b.user != null" [routerLink]="['/admin','book','plist','byuser',b.user.id]">({{b.user.id}}) {{b.user.username}}</a>
-
-            <span class="text-red-400 font-medium" *ngIf="b.user == null">NO USER</span>
+            <span *ngIf="b.available" class="text-green-600">AVAILABLE</span>
+            <span *ngIf="!b.available" class="text-red-600">LOANED</span>
           </td>
+          <!--Owner User -->
           <td class="px-6 py-4 text-white">
-            <a [routerLink]="['/admin','reply','plist','byBook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
+            <a  *ngIf="b.ownerUser != null" [routerLink]="['/admin','book','plist','byuser',b.ownerUser.id]">({{b.ownerUser.id}}) {{b.ownerUser.username}}</a>
+          </td>
+          <!--Number of loans -->
+          <td class="px-6 py-4 text-white">
+            <a [routerLink]="['/admin','reply','plist','bybook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
             <span *ngIf="b.loans==0">0</span>
           </td>
-
+          <!--Tools -->
           <td class="px-6 py-4 text-white text-center">
             <div  class="inline-flex gap-2" role="group">
               <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','view',b.id]">VIEW</button>

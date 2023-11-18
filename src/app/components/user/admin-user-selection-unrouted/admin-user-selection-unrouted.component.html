@@ -37,7 +37,6 @@
             <td class="text-end"><strong>{{u.id}}</strong></td>
             <td>{{u.name}}</td>
             <td>{{u.surname}}</td>
-            <td>{{u.lastname}}</td>
             <td>{{u.email}}</td>
             <td>{{u.username}}</td>
             <td class="text-center">
@@ -45,10 +44,10 @@
               <span *ngIf="u.role==false">User</span>
             </td>
             <td class="text-center">
-              {{u.books}}
+              {{u.numberOfBooks}}
             </td>
             <td class="text-center">
-              {{u.loans}}
+              {{u.numberOfLoans}}
             </td>
             <td class="text-center">
               <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">

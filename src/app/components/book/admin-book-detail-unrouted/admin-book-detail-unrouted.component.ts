@@ -13,7 +13,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 export class AdminBookDetailUnroutedComponent {
   @Input() id: number = 1;
 
-  oBook: IBook = { user: {} } as IBook;
+  oBook: IBook = { ownerUser: {} } as IBook;
   status: HttpErrorResponse | null = null;
 
   constructor(
