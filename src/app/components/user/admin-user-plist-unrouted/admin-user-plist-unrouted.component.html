@@ -75,25 +75,32 @@
     </table>
   </div>
   <div>
-    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
   </div>
 </div>
+<p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+  [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
 
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
-  <ng-template pTemplate="header">
-    <h5>
-      <mat-icon class="icon-display scale-150 mb-5">warning</mat-icon> User removal
-    </h5>
-  </ng-template>
-  <ng-template pTemplate="message">
-    <div class=" mx-28">
-      <app-admin-user-detail-unrouted [id]="oUserToRemove!.id"></app-admin-user-detail-unrouted>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <p class="text-lg">Are you sure to remove user?</p>
-    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
-  </ng-template>
-</p-confirmDialog>
+
+
+<div class="card flex justify-content-center">
+  <p-confirmDialog #cd [style]="{}">
+      <ng-template pTemplate="header">
+          <h1 class="flex">
+            <mat-icon class="icon-display scale-150 mx-5">warning</mat-icon> User removal</h1>
+
+      </ng-template>
+      <ng-template pTemplate="icon">
+          <i class="pi pi-user"></i>
+      </ng-template>
+      <ng-template pTemplate="message">
+          <div>
+            <app-admin-user-detail-unrouted [id]="oUserToRemove!.id" ></app-admin-user-detail-unrouted>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p class="text-lg">Are you sure to remove user?</p>
+        <button class="mr-11 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" pButton label="Cancel" (click)="cd.reject()"></button>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" pButton label="Continue" (click)="cd.accept()"></button>
+      </ng-template>
+  </p-confirmDialog>
+</div>
