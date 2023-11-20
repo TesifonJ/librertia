@@ -78,7 +78,7 @@ export class AdminLoanFormUnroutedComponent {
       if (this.operation == 'NEW') {
         this.oLoanAjaxService.newOne(this.LoanForm.value).subscribe({
           next: (data: ILoan) => {
-            this.oLoan = { "user": {}, "book": {}, "creationDate":{}, "dueDate":{}, "returnDate":{} } as ILoan;
+            this.oLoan = { "user": {}, "book": {}, "creationDate":{} , "dueDate":{}, "returnDate":{} } as ILoan;
             this.initializeForm(this.oLoan);
             this.matSnackBar.open("Loan has been created.", '', { duration: 2000 });
             this.router.navigate(['/admin', 'loan', 'view', data]);

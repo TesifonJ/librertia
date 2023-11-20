@@ -1,1 +1,56 @@
-<p>user-loan-detail-unrouted works!</p>
+<div *ngIf="status!=null">
+    <div class="d-flex justify-content-center my-3">
+        <div class="alert alert-danger" role="alert">
+            {{status!.error.message}} - {{status!.message}}
+        </div>
+    </div>
+</div>
+
+<div *ngIf="status==null">
+    <div class="bg-slate-700 flex justify-center items-center rounded-lg p-5">
+        <div class="card flex flex-col w-full max-w-2xl my-3">
+            <div>
+                <div class="flex flex-col text-2xl ms-2">
+                    <!--Loan ID -->
+                    <span class="text-gray-900 dark:text-white">
+                        ID: #[{{oLoan.id}}]
+                    </span>
+                    <!--Book-->
+                    <span class="text-gray-900 dark:text-white">
+                        Book: #{{oLoan.book.id}} {{oLoan.book.title}}
+                    </span>
+                    <!--User-->
+                    <span class=" text-white">
+                        Owner:
+                        <a [routerLink]="['/admin','loan','plist','byuser',oLoan.user.id]" *ngIf="oLoan.user.role == false"
+                            class="text-red-500">
+                            #{{oLoan.user.id}} {{oLoan.user.username}}
+                        </a>
+    
+                        <a [routerLink]="['/admin','loan','plist','byuser',oLoan.user.id]" *ngIf="oLoan.user.role == true"
+                            class="text-blue-500">
+                            #{{oLoan.user.id}} {{oLoan.user.username}}
+                        </a>
+                    </span>
+                    <!--Creation Date -->
+                    <span class="text-gray-900 dark:text-white">
+                        Loan Date: {{oLoan.creationDate}}
+                    </span>
+                    <!--Due Date -->
+                    <span class="text-gray-900 dark:text-white">
+                        Due Date: {{oLoan.dueDate}}
+                    </span>
+                    <!--Return Date -->
+                    <span class="text-gray-900 dark:text-white" *ngIf="oLoan.returnDate != null">
+                        Return Date: {{oLoan.returnDate}}
+                    </span>
+    
+                    <span class="text-gray-900 dark:text-white" *ngIf="oLoan.returnDate == null"
+                        class="font-semibold text-red-600">
+                        Return Date: Not Returned
+                    </span>
+    
+                </div>
+            </div>
+        </div>
+</div>

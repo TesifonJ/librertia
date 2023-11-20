@@ -37,7 +37,7 @@
                                     class="pi pi-search"></i><mat-icon>search</mat-icon></button>
                         </div>
                         <div class="mb-5">
-                            {{oLoan.book.title}} {{oLoan.book.author}}
+                            "{{oLoan.book.title}}"<br>{{oLoan.book.author}}
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
                                 type="button" (click)="onShowUsersSelection()"> <i
                                     class="pi pi-search"></i><mat-icon>search</mat-icon></button>
                         </div>
-                        <div class="mb-5">{{oLoan.user.name}} {{oLoan.user.username}}</div>
+                        <div class="mb-5">{{oLoan.user.name}}<br>{{oLoan.user.username}}</div>
                     </div>
                     
                     <!--Creation Date-->
