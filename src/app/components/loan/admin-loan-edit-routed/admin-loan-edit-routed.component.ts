@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AdminLoanEditRoutedComponent {
 
+ 
   id: number = 1;
 
   constructor(

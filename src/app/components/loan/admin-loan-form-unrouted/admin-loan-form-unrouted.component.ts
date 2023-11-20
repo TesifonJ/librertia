@@ -17,7 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AdminLoanFormUnroutedComponent {
   @Input() id: number = 1;
-  @Input() operation: formOperation = 'NEW'; // new or edit
+  @Input() operation: formOperation = 'NEW';
 
   es = CALENDAR_ES;
 
@@ -46,7 +46,7 @@ export class AdminLoanFormUnroutedComponent {
       user: this.formBuilder.group({
         id: [oLoan.user.id, Validators.required]
       }),
-      Book: this.formBuilder.group({
+      book: this.formBuilder.group({
         id: [oLoan.book.id, Validators.required]
       })
     });
@@ -78,10 +78,10 @@ export class AdminLoanFormUnroutedComponent {
       if (this.operation == 'NEW') {
         this.oLoanAjaxService.newOne(this.LoanForm.value).subscribe({
           next: (data: ILoan) => {
-            this.oLoan = { "user": {}, "book": {} } as ILoan;
+            this.oLoan = { "user": {}, "book": {}, "creationDate":{}, "dueDate":{}, "returnDate":{} } as ILoan;
             this.initializeForm(this.oLoan);
             this.matSnackBar.open("Loan has been created.", '', { duration: 2000 });
-            this.router.navigate(['/admin', 'Loan', 'view', data]);
+            this.router.navigate(['/admin', 'loan', 'view', data]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -94,7 +94,7 @@ export class AdminLoanFormUnroutedComponent {
             this.oLoan = data;
             this.initializeForm(this.oLoan);
             this.matSnackBar.open("Loan has been updated.", '', { duration: 2000 });
-            this.router.navigate(['/admin', 'Loan', 'view', this.oLoan.id]);
+            this.router.navigate(['/admin', 'loan', 'view', this.oLoan.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -134,7 +134,7 @@ export class AdminLoanFormUnroutedComponent {
     this.oDynamicDialogRef.onClose.subscribe((oBook: IBook) => {
       if (oBook) {
         this.oLoan.book = oBook;
-        this.LoanForm.controls['Book'].patchValue({ id: oBook.id })
+        this.LoanForm.controls['book'].patchValue({ id: oBook.id })
       }
     });
   }
