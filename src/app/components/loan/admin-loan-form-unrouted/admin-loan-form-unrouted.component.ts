@@ -22,7 +22,7 @@ export class AdminLoanFormUnroutedComponent {
   es = CALENDAR_ES;
 
   LoanForm!: FormGroup;
-  oLoan: ILoan = { loanDate: new Date(Date.now() + 15), dueDate: new Date(Date.now()), user: {}, book: {} } as ILoan;
+  oLoan: ILoan = {creationDate: new Date(Date.now()), dueDate: {}, returnDate: {}, user: {}, book: {} } as ILoan;
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
@@ -40,8 +40,9 @@ export class AdminLoanFormUnroutedComponent {
   initializeForm(oLoan: ILoan) {
     this.LoanForm = this.formBuilder.group({
       id: [oLoan.id],
+      creationDate: [new Date(oLoan.creationDate), [Validators.required]],
       dueDate: [new Date(oLoan.dueDate), [Validators.required]],
-      loanDate: [new Date(oLoan.loanDate), [Validators.required]],
+      returnDate: [new Date(oLoan.returnDate)],
       user: this.formBuilder.group({
         id: [oLoan.user.id, Validators.required]
       }),

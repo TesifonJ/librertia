@@ -7,23 +7,20 @@
 </div>
 
 <div *ngIf="status==null">
-  <div class="d-flex justify-content-between mb-3">
+  <div class="flex justify-content-between mb-3">
     <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}}) 
-      <a type="button" class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','book','plist']">reset filter</a>
+      <a type="button" class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','user','plist']">reset filter</a>
     </h3>
 
     <h3 *ngIf="!(id_user>0)">No active filter</h3>
 
     <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} Books.</h3>
   </div>
-  <div class="flex justify-content-center mb-3">
-    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-  </div>
+  
 
 
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
-    <table class="w-full 1sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table class=" text-center w-full text-sm text-left rtl:text-right font-medium  bg-slate-700  rounded-lg">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th class="px-6 py-3" (click)="doOrder('id')">ID</th>
@@ -33,48 +30,52 @@
           <th class="px-6 py-3" (click)="doOrder('available')">Available</th>
           <th class="px-6 py-3" (click)="doOrder('ownerUser')">Owner User</th>
           <th class="px-6 py-3">Number of loans</th>
-          <th class="px-6 py-3">Tools</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let b of oPage?.content" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
           <!--ID -->
-          <td class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">{{b.id}}</td>
+          <td class="px-4 pt-3font-medium  dark:text-white whitespace-nowrap dark:text-white">{{b.id}}</td>
           <!--Title -->
-          <td class="px-6 py-4 text-white">{{b.title}}</td>
+          <td class="px-4 pt-3 dark:text-white">{{b.title}}</td>
           <!--Author -->
-          <td class="px-6 py-4 text-white">{{b.author}}</td>
+          <td class="px-4 pt-3 dark:text-white">{{b.author}}</td>
           <!--Category -->
-          <td class="px-6 py-4 text-white">{{b.category}}</td>
+          <td class="px-4 pt-3 dark:text-white">{{b.category}}</td>
           <!--Avalaible -->
-          <td class="px-6 py-4 text-white">
+          <td class="px-4 pt-3 dark:text-white">
             <span *ngIf="b.available" class="text-green-600">AVAILABLE</span>
             <span *ngIf="!b.available" class="text-red-600">LOANED</span>
           </td>
           <!--Owner User -->
-          <td class="px-6 py-4 text-white">
-            <a  *ngIf="b.ownerUser != null" [routerLink]="['/admin','book','plist','byuser',b.ownerUser.id]">({{b.ownerUser.id}}) {{b.ownerUser.username}}</a>
+          <td class="px-4 pt-3 dark:text-white">
+            <a  *ngIf="b.ownerUser != null" [routerLink]="['/admin','book','plist','byuser',b.ownerUser.id]">({{b.ownerUser.id}}) {{b.ownerUser.username}} </a>
           </td>
           <!--Number of loans -->
-          <td class="px-6 py-4 text-white">
+          <td class="px-4 pt-3  dark:text-white text-center  underline">
             <a [routerLink]="['/admin','reply','plist','bybook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
-            <span *ngIf="b.loans==0">0</span>
+            <span *ngIf="b.loans==0" class="dark:text-white ">0</span>
           </td>
           <!--Tools -->
-          <td class="px-6 py-4 text-white text-center">
-            <div  class="inline-flex gap-2" role="group">
-              <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','view',b.id]">VIEW</button>
-              <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doView(b)">VIEWP</button>
-              <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','edit',b.id]">EDIT</button>
-              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" *ngIf="b.loans==0" (click)="doRemove(b)">REMOVE</button>
-            </div>
+          <td class="inline-flex px-4 py-3 gap-2 text-white" role="group">
+              <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','view',b.id]"><mat-icon>remove_red_eye</mat-icon></button>
+              <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doView(b)"><mat-icon>assignment_ind</mat-icon></button>
+              <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" [routerLink]="['/admin','book','edit',b.id]"><mat-icon>edit</mat-icon></button>
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" *ngIf="b.loans==0" (click)="doRemove(b)"><mat-icon>delete_forever</mat-icon></button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div>
+    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
 </div>
+
+
+
 
 <p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="header">

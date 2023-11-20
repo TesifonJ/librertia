@@ -87,8 +87,7 @@ export class AdminLoanPlistUnroutedComponent {
   }
 
   doView(u: ILoan) {
-    let ref: DynamicDialogRef | undefined;
-    ref = this.oDialogService.open(AdminLoanDetailUnroutedComponent, {
+    this.oDialogService.open(AdminLoanDetailUnroutedComponent, {
       data: {
         id: u.id
       },

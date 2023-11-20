@@ -65,8 +65,9 @@ export interface IBookPage extends IPage<IBook> {
 }
 
 export interface ILoan extends IEntity {
-    loanDate: Date,
+    creationDate: Date,
     dueDate: Date,
+    returnDate: Date,
     book: IBook,
     user: IUser,
 }

@@ -7,33 +7,5 @@
 </div>
 
 <div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Property</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <th>id</th>
-                <td>{{oLoan.id}}</td>
-            </tr>
-            <tr>
-                <th>user</th>
-                <td> <a [routerLink]="['/admin','user','view',oLoan.user.id]">{{oLoan.user.name}}
-                        {{oLoan.user.surname}}</a></td>
-            </tr>
-            <tr>
-                <th>book</th>
-                <td> <a [routerLink]="['/admin','book','view',oLoan.book.id]">{{oLoan.book.title}}</a> </td>
-            </tr>
-            <tr>
-                <th>Due date</th>
-                <td>{{oLoan.dueDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-            </tr>
-            <tr>
-                <th>Loan date</th>
-                <td>{{oLoan.loanDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-            </tr>
-        </tbody>
-    </table>
+
 </div>

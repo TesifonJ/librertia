@@ -7,7 +7,7 @@
   </div>
   
   <div *ngIf="status==null">
-    <div class="d-flex justify-content-between mb-3">
+    <div class="flex justify-between mb-3">
       <h3 *ngIf="id_book>0">Filtered by book ({{id_book}} - {{oBook?.title | trimming}})
         <button [routerLink]="['/admin','loan','plist']">reset filter</button>
       </h3>
@@ -20,14 +20,11 @@
       <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} replies</h3>
    
     </div>
-    <div class="flex justify-content-center mb-3">
-      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-        [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-    </div>
+
   
   
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <table class="w-full text-center text-sm text-left rtl:text-right font-medium  bg-slate-700  rounded-lg">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3" (click)="doOrder('id')">ID</th>
@@ -35,20 +32,22 @@
             <th scope="col" class="px-6 py-3" (click)="doOrder('user')">User</th>          
             <th scope="col" class="px-6 py-3" (click)="doOrder('loanDate')">Loan Date</th>
             <th scope="col" class="px-6 py-3" (click)="doOrder('dueDate')">Due Date</th>
-            <th scope="col" class="px-6 py-3">Tools</th>
+            <th scope="col" class="px-6 py-3" (click)="doOrder('returnDate')">Return Date</th>
+            <th scope="col" class="px-6 py-3">Options</th>
           </tr>
         </thead>
 
         <tbody>
           <tr *ngFor="let l of oPage?.content" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
+            <!-- ID -->
             <td scope="row" class="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">{{l.id}}</td>
-
+            <!-- book -->
             <td class="px-6 py-4 text-white">
               <a [routerLink]="['/admin','loan','plist','bybook',l.book.id]">({{l.book.id}})
                 {{l.book.title}}
               </a>
             </td >
-
+            <!-- user -->
             <td class="px-6 py-4 text-white" *ngIf="l.user != null">
               <a [routerLink]="['/admin','loan','plist','byuser',l.user.id]">({{l.user.id}}) {{l.user.name}}
               </a>
@@ -56,22 +55,33 @@
             <td class="px-6 py-4 text-white" *ngIf="l.user == null">
               Available
             </td>
-           
-            <td class="px-6 py-4 text-white" pTooltip="{{l.loanDate}}">{{l.loanDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-            
-            <td class="px-6 py-4 text-white" pTooltip="{{l.dueDate}}" >{{l.dueDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-            
-            <td class="text-center">
-              <div class="inline-flex gap-2" role="group">
-                <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','view',l.id]">VIEW</button>
-                <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  (click)="doView(l)">VIEWP</button>
-                <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','edit',l.id]">EDIT</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doRemove(l)">REMOVE</button>
-              </div>
+            <!-- loanDate -->
+            <td class="px-6 py-4 text-white" pTooltip="{{l.creationDate}}">{{l.creationDate | date:'dd/MM/yyyy'}}</td>
+            <!-- dueDate -->  
+            <td class="px-6 py-4 text-white" pTooltip="{{l.dueDate}}" >{{l.dueDate | date:'dd/MM/yyyy'}}</td>
+            <!-- returnDate -->
+            <td class="px-6 py-4 text-white" pTooltip="{{l.returnDate}}" >
+            <span *ngIf="l.returnDate != null">
+              {{l.returnDate | date:'dd/MM/yyyy'}}
+            </span>
+            <span *ngIf="l.returnDate == null" class="text-red-600 font-bold">
+              Not returned
+            </span>
+            </td>
+            <!-- options -->
+            <td class="inline-flex px-4 py-3 gap-2 text-white" role="group">
+                <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','view',l.id]"><mat-icon>remove_red_eye</mat-icon></button>
+                <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  (click)="doView(l)"><mat-icon>assignment_ind</mat-icon></button>
+                <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  [routerLink]="['/admin','loan','edit',l.id]"><mat-icon>edit</mat-icon></button>
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="doRemove(l)" *ngIf="l.returnDate!=null"><mat-icon>delete_forever</mat-icon></button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div>
+      <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+        [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
     </div>
   </div>
   
