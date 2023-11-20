@@ -6,34 +6,34 @@
     </div>
 </div>
 
-<div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Property</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <th>id</th>
-                <td>{{oBook.id}}</td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td>{{oBook.title}}</td>
-            </tr>
-            <tr>
-                <th>user</th>
-                <td> <a [routerLink]="['/admin','user','view',oBook.ownerUser.id]">{{oBook.ownerUser.name}}
-                        {{oBook.ownerUser.surname}}</a></td>
-            </tr>
-            <tr>
-                <th>loans</th>
-                <td>
-                    <a [routerLink]="['/admin','reply','plist','byBook',oBook.id]"
-                        *ngIf="oBook.loans>0">{{oBook.loans}}</a>
-                    <span *ngIf="oBook.loans==0 || oBook.loans == null">0</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<div class="bg-slate-700 flex justify-center items-center rounded-lg p-5">
+    <div class="card flex flex-col w-full max-w-2xl my-3">
+        <div>
+            <div class="mx-2">
+                <img class="w-128 h-250 mb-3 shadow-lg "
+                    src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1657781256i/61439040.jpg"
+                    alt="User image" />
+            </div>
+
+            <div class="flex flex-col text-2xl ms-2">
+                <span class="text-gray-900 dark:text-white">[{{oBook.id}}]
+                    {{oBook.title}}
+                </span>
+
+                <span class=" text-white">
+                    Owner:
+                    <a [routerLink]="['/admin','book','plist','byuser',oBook.ownerUser.id]"
+                        *ngIf="oBook.ownerUser.role == false" class="text-red-500">
+                        @{{oBook.ownerUser.username}}
+                    </a>
+
+                    <a [routerLink]="['/admin','book','plist','byuser',oBook.ownerUser.id]"
+                        *ngIf="oBook.ownerUser.role == true" class="text-blue-500">
+                        {{oBook.ownerUser.username}}
+                    </a>
+                </span>
+                <span *ngIf="oBook.available" class="text-green-500 font-medium">Available</span>
+                <span class=" dark:text-white">Author: {{oBook.author}}</span>
+                <span class=" dark:text-white">Category: {{oBook.category}}</span>
+            </div>
+        </div>

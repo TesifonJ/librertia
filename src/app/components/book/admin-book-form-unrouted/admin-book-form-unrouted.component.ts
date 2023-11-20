@@ -37,7 +37,10 @@ export class AdminBookFormUnroutedComponent {
     this.BookForm = this.formBuilder.group({
       id: [oBook.id],
       title: [oBook.title, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]],
-      user: this.formBuilder.group({
+      author: [oBook.author, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]],
+      category: [oBook.category, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]],
+      available: [oBook.available, [Validators.required]],
+      ownerUser: this.formBuilder.group({
         id: [oBook.ownerUser.id, Validators.required]
       })
     });
@@ -70,9 +73,9 @@ export class AdminBookFormUnroutedComponent {
         this.oBookAjaxService.newOne(this.BookForm.value).subscribe({
           next: (data: IBook) => {
             this.oBook = { "ownerUser": {} } as IBook;
-            this.initializeForm(this.oBook); //el id se genera en el servidor
+            this.initializeForm(this.oBook); 
             this.oMatSnackBar.open('Book has been created.', '', { duration: 2000 });
-            this.router.navigate(['/admin', 'Book', 'view', data]);
+            this.router.navigate(['/admin', 'book', 'view', data]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -85,7 +88,7 @@ export class AdminBookFormUnroutedComponent {
             this.oBook = data;
             this.initializeForm(this.oBook);
             this.oMatSnackBar.open('Book has been updated.', '', { duration: 2000 });
-            this.router.navigate(['/admin', 'Book', 'view', this.oBook.id]);
+            this.router.navigate(['/admin', 'book', 'view', this.oBook.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -100,7 +103,8 @@ export class AdminBookFormUnroutedComponent {
     this.oDynamicDialogRef = this.oDialogService.open(AdminUserSelectionUnroutedComponent, {
       header: 'Select a User',
       width: '80%',
-      contentStyle: { overflow: 'auto' },
+      contentStyle: { overflow: 'auto'
+      },
       baseZIndex: 10000,
       maximizable: true
     });
@@ -108,7 +112,7 @@ export class AdminBookFormUnroutedComponent {
     this.oDynamicDialogRef.onClose.subscribe((oUser: IUser) => {
       if (oUser) {
         this.oBook.ownerUser = oUser;
-        this.BookForm.controls['user'].patchValue({ id: oUser.id })
+        this.BookForm.controls['ownerUser'].patchValue({ id: oUser.id })
       }
     });
   }

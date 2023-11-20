@@ -19,7 +19,7 @@
 
 
           <mat-form-field>
-            <mat-label >Name:</mat-label>
+            <mat-label>Name:</mat-label>
             <input matInput formControlName="name" placeholder="Name" required>
             <mat-hint align="end">(3 to 255 characters long)</mat-hint>
             <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
@@ -59,7 +59,8 @@
           <mat-label><span class="text-white font-medium">User type</span></mat-label>
           <mat-radio-group aria-label="Type of user" formControlName="role" required>
             <mat-radio-button [value]="true"><span class="text-white font-medium text-xl">User</span></mat-radio-button>
-            <mat-radio-button [value]="false"><span class="text-white font-medium text-xl">Admin</span></mat-radio-button>
+            <mat-radio-button [value]="false"><span
+                class="text-white font-medium text-xl">Admin</span></mat-radio-button>
           </mat-radio-group>
 
 

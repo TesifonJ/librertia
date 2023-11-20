@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    color: black;
-}
+
 
 body {
     margin: 0 auto;
+    background-color: #111827;
+    color: white;
 }
 
 a {
@@ -18,3 +18,4 @@ a {
 a:hover {
     color: red;
 }
+
