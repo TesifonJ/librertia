@@ -1,9 +1,15 @@
-.nav-item .active {
-    background-color: darkslateblue;
-    border-radius: 4px;
-    color: aliceblue;
-
-    a {
-        color: aliceblue !important;
-    }	
+a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
 }
+
+a:hover {
+    color: red;
+}
+
+.nav-item .active {
+    border-radius: 4px;
+    color: rgb(0, 136, 255);
+}
+
+
