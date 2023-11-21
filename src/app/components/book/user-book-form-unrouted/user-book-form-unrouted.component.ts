@@ -3,8 +3,9 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { IBook, formOperation } from 'src/app/model/model.interfaces';
+import { IBook, IUser, formOperation } from 'src/app/model/model.interfaces';
 import { BookAjaxService } from 'src/app/services/book.ajax.service';
+import { UserAjaxService } from 'src/app/services/user.ajax.service';
 
 @Component({
   selector: 'app-user-book-form-unrouted',
@@ -18,12 +19,13 @@ export class UserBookFormUnroutedComponent {
   BookForm!: FormGroup;
   oBook: IBook = {  ownerUser: { id: 0 } } as IBook;
   status: HttpErrorResponse | null = null;
-
+  oUser: IUser = {} as IUser;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private oBookAjaxService: BookAjaxService,
+    private oUserAjaxService: UserAjaxService,
     private oMatSnackBar: MatSnackBar,
     public oDynamicDialogRef: DynamicDialogRef,
     public oDialogService: DialogService
@@ -34,10 +36,9 @@ export class UserBookFormUnroutedComponent {
   initializeForm(oBook: IBook) {
     this.BookForm = this.formBuilder.group({
       id: [oBook.id],
-      title: [oBook.title, [Validators.required, Validators.minLength(10), Validators.maxLength(2048)]],
-      user: this.formBuilder.group({
-        id: [oBook.ownerUser.id, Validators.required]
-      })
+      title: [oBook.title, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]],
+      author: [oBook.author, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]],
+      category: [oBook.category, [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]]
     });
   }
 
@@ -67,8 +68,10 @@ export class UserBookFormUnroutedComponent {
       if (this.operation === 'NEW') {
         this.oBookAjaxService.newOne(this.BookForm.value).subscribe({
           next: (data: IBook) => {
-            this.oBook = { "ownerUser": {} } as IBook;
-            this.initializeForm(this.oBook); //el id se genera en el servidor
+            let currentUser = this.getOne();
+            
+            this.oBook = { "ownerUser": currentUser} as IBook;
+            this.initializeForm(this.oBook);
             this.oMatSnackBar.open('Book has been created.', '', { duration: 2000 });
             this.oDynamicDialogRef.close(data);  
           },
@@ -93,5 +96,18 @@ export class UserBookFormUnroutedComponent {
       }
     }
   }
+  getOne(): IUser {
+    this.oUserAjaxService.getOne(this.id).subscribe({    
+      next: (data: IUser) => {
+        this.oUser = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
 
+    })
+
+    return this.oUser;
+
+  }
 }
