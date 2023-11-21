@@ -9,6 +9,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
 import { LoanAjaxService } from 'src/app/services/loan.ajax.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-admin-loan-form-unrouted',
@@ -22,7 +23,7 @@ export class AdminLoanFormUnroutedComponent {
   es = CALENDAR_ES;
 
   LoanForm!: FormGroup;
-  oLoan: ILoan = {creationDate: new Date(Date.now()), dueDate: {}, returnDate: {}, user: {}, book: {} } as ILoan;
+  oLoan: ILoan = {creationDate: new Date(Date.now()), dueDate: {}, returnDate: "null", user: {}, book: {} } as ILoan;
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
@@ -32,9 +33,15 @@ export class AdminLoanFormUnroutedComponent {
     private oLoanAjaxService: LoanAjaxService,
     private router: Router,
     private matSnackBar: MatSnackBar,
-    public oDialogService: DialogService
+    public oDialogService: DialogService,
+    private datePipe: DatePipe  // Inyecta DatePipe
+
   ) {
     this.initializeForm(this.oLoan);
+  }
+
+  private formatDate(date: Date): string {
+    return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
   }
 
   initializeForm(oLoan: ILoan) {
@@ -75,8 +82,16 @@ export class AdminLoanFormUnroutedComponent {
 
   onSubmit() {
     if (this.LoanForm.valid) {
+      const loanFormValue = this.LoanForm.value;
+  
+      // Formatear las fechas antes de enviarlas para no enviar la hora
+      loanFormValue.creationDate = this.formatDate(loanFormValue.creationDate);
+      loanFormValue.dueDate = this.formatDate(loanFormValue.dueDate);
+
+      loanFormValue.returnDate = this.formatDate(loanFormValue.returnDate);
+  
       if (this.operation == 'NEW') {
-        this.oLoanAjaxService.newOne(this.LoanForm.value).subscribe({
+        this.oLoanAjaxService.newOne(loanFormValue).subscribe({
           next: (data: ILoan) => {
             this.oLoan = { "user": {}, "book": {}, "creationDate":{} , "dueDate":{}, "returnDate":{} } as ILoan;
             this.initializeForm(this.oLoan);
@@ -89,7 +104,7 @@ export class AdminLoanFormUnroutedComponent {
           }
         });
       } else {
-        this.oLoanAjaxService.updateOne(this.LoanForm.value).subscribe({
+        this.oLoanAjaxService.updateOne(loanFormValue).subscribe({
           next: (data: ILoan) => {
             this.oLoan = data;
             this.initializeForm(this.oLoan);
@@ -104,6 +119,7 @@ export class AdminLoanFormUnroutedComponent {
       }
     }
   }
+  
 
   onShowUsersSelection() {
     this.oDynamicDialogRef = this.oDialogService.open(AdminUserSelectionUnroutedComponent, {

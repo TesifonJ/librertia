@@ -1,3 +1,4 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -52,7 +53,6 @@ import { AdminLoanPlistUnroutedComponent } from './components/loan/admin-loan-pl
 import { AdminLoanViewRoutedComponent } from './components/loan/admin-loan-view-routed/admin-loan-view-routed.component';
 import { UserLoanDetailUnroutedComponent } from './components/loan/user-loan-detail-unrouted/user-loan-detail-unrouted.component';
 import { UserLoanFormUnroutedComponent } from './components/loan/user-loan-form-unrouted/user-loan-form-unrouted.component';
-import { UserLoanPlistUnroutedComponent } from './components/loan/user-loan-plist-unrouted/user-loan-plist-unrouted.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminBookSelectionUnroutedComponent } from './components/book/admin-book-selection-unrouted/admin-book-selection-unrouted.component';
 import { TrimPipe } from './pipes/trim.pipe';
@@ -67,6 +67,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TableModule } from 'primeng/table';
 import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-featured-unrouted/user-book-featured-unrouted.component';
+import { DatePipe } from '@angular/common';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,7 @@ import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-f
     LoginRoutedComponent,
     LogoutRoutedComponent,
     FooterUnroutedComponent,
+    DatePickerComponent,
     //Normal User
     NormalUserFeaturedUnroutedComponent,
     NormalUserDetailUnroutedComponent,
@@ -114,7 +118,6 @@ import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-f
     //User Loan
     UserLoanDetailUnroutedComponent,
     UserLoanFormUnroutedComponent,
-    UserLoanPlistUnroutedComponent,
 
     
   ],
@@ -144,6 +147,8 @@ import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-f
     MatFormFieldModule,
     MatToolbarModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     //--
   ],
   providers: [
@@ -157,6 +162,7 @@ import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-f
     SessionAjaxService,
     CryptoService,
     CryptoService,
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

@@ -65,9 +65,9 @@ export interface IBookPage extends IPage<IBook> {
 }
 
 export interface ILoan extends IEntity {
-    creationDate: Date,
+    creationDate: Date ,
     dueDate: Date,
-    returnDate: Date,
+    returnDate: Date | string,
     book: IBook,
     user: IUser,
 }

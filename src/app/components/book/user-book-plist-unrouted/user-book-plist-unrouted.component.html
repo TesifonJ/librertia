@@ -7,45 +7,76 @@
 </div>
 
 <div *ngIf="status==null">
-  <div class="d-flex justify-content-between">
 
-    <input type="radio" class="btn-check btn-sm" name="options-outlined" id="success-outlined" autocomplete="off"
-      (change)="onOrderChange($event)" [checked]="activeOrder">
-    <label class="btn btn-outline-success" for="success-outlined">by new</label>
 
-    <h5 class="px-2">Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} Books.</h5>
+  <!-- Order By New-->
+  <div class="flex">
+    <span class="me-5">
+      LIST BY:
+    </span>
+    <label class=" space-x-4">
+      <input type="radio" class="" name="options-outlined" id="success-outlined" autocomplete="off"
+        (change)="onOrderChange($event)" [checked]="activeOrder">
+      <span>NEW</span>
+    </label>
 
-    <input type="radio" class="btn-check btn-sm" name="options-outlined" id="danger-outlined" autocomplete="off"
-      (change)="onOrderChange($event)" [checked]="!activeOrder">
-    <label class="btn btn-outline-danger" for="danger-outlined">by popular</label>
-
+    <!-- Order By Popular-->
+    <label class="mx-4 space-x-4">
+      <input type="radio" class="" name="options-outlined" id="danger-outlined" autocomplete="off"
+        (change)="onOrderChange($event)" [checked]="!activeOrder">
+      <span class="btn btn-outline-danger">POPULAR</span>
+    </label>
   </div>
 
-  <div class="flex justify-content-center m-1">
-    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="" [showPageLinks]="false"></p-paginator>
-  </div>
+  <!-- Post new book -->
+  <button type="button" class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded my-2"
+    (click)="postNewBook()" *ngIf="oSessionService.isSessionActive()">
+    <mat-icon>book</mat-icon><mat-icon>plus_one</mat-icon>
+  </button>
 
-  <div class=" d-flex">
-    <ul class="list-group">
 
-      <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let b of oPage?.content"
-        (click)="doShowLoans(b)" [ngClass]="{active: b.id==activeBook?.id}">
-
-        <div class="ms-2 me-auto">
-          <a href="">{{b.title}}</a>
-        </div>
-        <div class="ms-1">
-          <span class="badge bg-light">
-            <span class="badge text-bg-warning"
-              *ngIf="b.ownerUser.username==oSessionService.getUsername()">{{b.ownerUser.username}}</span>
-            <span class="badge text-bg-info"
-              *ngIf="b.ownerUser.username!=oSessionService.getUsername()">{{b.ownerUser.username}}</span>
-            <span class="badge bg-secondary rounded-pill">{{b.loans}}</span>
-          </span>
-        </div>
-      </li>
-    </ul>
-
+  <div class="relative overflow-auto rounded-xl">
+    <div class="flex justify-between mb-3">
+      <h3 class="text-xl">Showing {{ oPage?.numberOfElements }} of total {{ oPage?.totalElements }} books.</h3>
+    </div>
+    <!-- Table -->
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+      <table class=" text-center w-full text-sm text-left rtl:text-right font-medium  bg-slate-700  rounded-lg">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th class="px-6 py-3">Title</th>
+            <th class="px-6 py-3">Author</th>
+            <th class="px-6 py-3">Times Loaned</th>
+            <th class="px-6 py-3">Category</th>
+            <th class="px-6 py-3">Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of oPage?.content" (click)="doShowLoans(b)" [ngClass]="{ active: b.id==activeBook?.id }"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <!--Title -->
+            <td class="px-4 pt-3 dark:text-white">{{b.title}}</td>
+            <!--Author -->
+            <td class="px-4 pt-3 dark:text-white">{{b.author}}</td>
+            <!--Category -->
+            <td class="px-4 pt-3 dark:text-white">{{b.category}}</td>
+            <!--Avalaible -->
+            <td class="px-4 pt-3 dark:text-white">
+              <span *ngIf="b.available" class="text-green-600">AVAILABLE</span>
+              <span *ngIf="!b.available" class="text-red-600">LOANED</span>
+            </td>
+            <!--Number of loans -->
+            <td class="px-4 pt-3  dark:text-white text-center  underline">
+              <a [routerLink]="['/admin','reply','plist','bybook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
+              <span *ngIf="b.loans==0" class="dark:text-white ">0</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
+<!-- Paginator -->
+<p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+  [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>

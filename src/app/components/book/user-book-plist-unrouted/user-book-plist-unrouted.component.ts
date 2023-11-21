@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IBook, IUser, IBookPage } from 'src/app/model/model.interfaces';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { BookAjaxService } from 'src/app/services/book.ajax.service';
 import { SessionAjaxService } from 'src/app/services/session.ajax.service';
 import { UserAjaxService } from 'src/app/services/user.ajax.service';
 import { Subject } from 'rxjs';
+import { UserBookFormUnroutedComponent } from '../user-book-form-unrouted/user-book-form-unrouted.component';
 
 @Component({
   selector: 'app-user-book-plist-unrouted',
@@ -14,10 +15,14 @@ import { Subject } from 'rxjs';
   styleUrls: ['./user-book-plist-unrouted.component.scss']
 })
 export class UserBookPlistUnroutedComponent {
- 
+  id_Book_filter: number = 0; //filter by Book
+  id_user_filter: number = 0; //filter by Book
+
   @Input() id_user: number = 0; //filter by user
   @Input() reload: Subject<boolean> = new Subject<boolean>();
   @Output() book_selection = new EventEmitter<IBook>();
+  @Output() book_change = new EventEmitter<Boolean>();
+
 
   activeOrder: boolean = true; //true=new false=popular always desc
   activeBook: IBook | null = null;
@@ -35,6 +40,7 @@ export class UserBookPlistUnroutedComponent {
     private oUserAjaxService: UserAjaxService,
     public oSessionService: SessionAjaxService,
     private oBookAjaxService: BookAjaxService,
+    public oDialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -89,7 +95,7 @@ export class UserBookPlistUnroutedComponent {
     })
   }
 
-  onPageChang(event: PaginatorState) {
+  onPageChange(event: PaginatorState) {
     this.oPaginatorState.rows = event.rows;
     this.oPaginatorState.page = event.page;
     if (this.activeOrder) {
@@ -143,4 +149,23 @@ export class UserBookPlistUnroutedComponent {
     })
   }
 
+  postNewBook(): void {
+    if (this.oSessionService.isSessionActive()) {
+      this.ref = this.oDialogService.open(UserBookFormUnroutedComponent, {
+        data: {
+          id_book: this.id_Book_filter,
+        },
+        header: 'Post a new Book',
+        width: '70%',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 10000,
+        maximizable: false
+      });
+
+      this.ref.onClose.subscribe((nBook: number) => {
+        this.getPage();
+        this.book_change.emit(true);
+      });
+    }
+  }
 }

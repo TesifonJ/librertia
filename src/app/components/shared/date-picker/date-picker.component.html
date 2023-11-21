@@ -1,0 +1,7 @@
+<p>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" [(ngModel)]="selectedDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>  
+</p>

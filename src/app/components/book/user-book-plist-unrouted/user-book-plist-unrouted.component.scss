@@ -1,0 +1,16 @@
+    /* Oculta los círculos de los inputs de tipo radio */
+    input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid #333; /* Puedes ajustar el color y el grosor del borde según tus preferencias */
+        outline: none;
+      }
+  
+      /* Aplica un estilo diferente cuando el input de tipo radio está marcado */
+      input[type="radio"]:checked {
+        background-color: #333; /* Puedes ajustar el color de fondo cuando está marcado */
+      }

@@ -6,13 +6,33 @@
   </div>
 </div>
 
-<div *ngIf="status==null">
-  <div class=" d-flex">
-    <ol>
-      <li *ngFor="let b of oPage?.content">
-        {{b.title}} {{b.ownerUser.username}} 
-      </li>
-    </ol>
-
+  <!-- component -->
+  <div class="flex flex-wrap -mx-3 mb-5 text-black">
+    <div class="w-full max-w-full px-3 mb-6  mx-auto">
+      <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-dashed border-stone-200 bg-white m-5">
+        <!-- card body  -->
+        <div class="flex-auto block py-8 px-9" >
+          <div>
+            <div class="mb-9">
+              <h1 class="mb-2 text-[1.75rem] font-semibold text-dark">Most Featured Books</h1>
+              <span class="text-[1.15rem] font-medium text-muted"> Here are the most loaned books! </span>
+            </div>
+            <!-- card body  -->
+            <div class="flex flex-wrap w-full" >
+              <div class="flex flex-col mx-5 text-center mb-11 lg:mr-16" *ngFor="let b of oPage?.content">
+                <div><span class="block font-medium text-muted">Loans: {{b.loans}}</span></div>
+                <div class="inline-block mb-4 relative shrink-0 rounded-[.95rem]" >
+                  <img class="inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]" src="../../../../assets/img/logo/logo.jpg" alt="avarat image">
+                </div>
+                <div class="text-center">
+                  <a href="" class="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out">{{b.title}} </a>
+                  <span class="block font-medium text-muted">{{b.author}}</span>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
