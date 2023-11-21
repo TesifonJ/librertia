@@ -17,6 +17,7 @@ import { UserBookFormUnroutedComponent } from '../user-book-form-unrouted/user-b
 export class UserBookPlistUnroutedComponent {
   id_Book_filter: number = 0; //filter by Book
   id_user_filter: number = 0; //filter by Book
+  oSessionUser: IUser | null = null;
 
   @Input() id_user: number = 0; //filter by user
   @Input() reload: Subject<boolean> = new Subject<boolean>();
@@ -41,7 +42,15 @@ export class UserBookPlistUnroutedComponent {
     public oSessionService: SessionAjaxService,
     private oBookAjaxService: BookAjaxService,
     public oDialogService: DialogService
-  ) { }
+  ) {
+    this.oUserAjaxService.getByUsername(this.oSessionService.getUsername()).subscribe({
+      next: (oUser: IUser) => {
+        this.oSessionUser = oUser;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    }); }
 
   ngOnInit() {
     this.reload.subscribe(Response => {

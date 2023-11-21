@@ -51,7 +51,7 @@
             </td>
             <!--Number of loans -->
             <td class="px-4 pt-3  dark:text-white text-center  underline">
-              <a [routerLink]="['/admin','reply','plist','bybook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
+              <a [routerLink]="['/admin','user','plist','bybook',b.id]" *ngIf="b.loans>0">{{b.loans}}</a>
               <span *ngIf="b.loans==0" class="dark:text-white ">0</span>
             </td>
             <!--Tools -->
