@@ -58,8 +58,10 @@
             <td class="inline-flex px-4 py-3 gap-2 text-white" role="group">
               <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 [routerLink]="['/admin','book','view',b.id]"><mat-icon>remove_red_eye</mat-icon></button>
+                
               <button class="bg-green-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 (click)="doView(b)"><mat-icon>assignment_ind</mat-icon></button>
+
               <button class="bg-yellow-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 [routerLink]="['/admin','book','edit',b.id]"><mat-icon>edit</mat-icon></button>
 
