@@ -92,8 +92,8 @@ export class AdminBookPlistUnroutedComponent {
     });
   }
 
-  doRemove(u: IBook) {
-    this.oBookToRemove = u;
+  doRemove(b: IBook) {
+    this.oBookToRemove = b;
     this.oCconfirmationService.confirm({
       accept: () => {
         this.oMatSnackBar.open("The Book has been removed.", '', { duration: 2000 });
