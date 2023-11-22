@@ -6,42 +6,26 @@
     </div>
 </div>
 
-<div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>name</th>
-                <td>{{oUser.name}} {{oUser.surname}}</td>
-            </tr>
-            <tr>
-                <th>email</th>
-                <td>{{oUser.email}}</td>
-            </tr>
-            <tr>
-                <th>username</th>
-                <td>{{oUser.username}}</td>
-            </tr>
-            <tr>
-                <th>role</th>
-                <td>
-                    <span *ngIf="oUser.role==true">Admin</span>
-                    <span *ngIf="oUser.role==false">User</span>
-                </td>
-            </tr>
-            <tr>
-                <th>books</th>
-                <td>
-                    <span *ngIf="oUser.numberOfBooks>0">{{oUser.numberOfBooks}}</span>
-                    <span *ngIf="oUser.numberOfBooks==0">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>loans</th>
-                <td>
-                    <span *ngIf="oUser.numberOfLoans>0">{{oUser.numberOfLoans}}</span>
-                    <span *ngIf="oUser.numberOfLoans==0">0</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="flex justify-center">
+    <div
+        class=" pt-11 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex flex-col items-center pb-10">
+            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="../../../../assets/img/logo/logo.jpg"
+                alt="Bonnie image" />
+            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{oUser.name}} {{oUser.surname}}</h5>
+            <span *ngIf="oUser.role == false"
+                class="text-sm text-red-500 dark:text-red-400">@{{oUser.username}}#{{oUser.id}}</span>
+            <span *ngIf="oUser.role == true"
+                class="text-sm text-blue-500 dark:text-blue-400">@{{oUser.username}}#{{oUser.id}}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{{oUser.email}}</span>
+            <div class="flex mt-4 md:mt-6">
+                <a [routerLink]="['/admin','book','plist','byuser',oUser.id]" *ngIf="oUser.numberOfBooks > 0"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">My
+                    Books</a>
+                <a [routerLink]="['/admin','loan','plist','byuser',oUser.id]" *ngIf="oUser.numberOfLoans > 0"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700 ms-3">My
+                    Loans</a>
+            </div>
+        </div>
+    </div>
 </div>

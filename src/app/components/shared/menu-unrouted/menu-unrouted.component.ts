@@ -71,8 +71,8 @@ export class MenuUnroutedComponent {
         data: {
           id: this.oSessionUser.id
         },
-        header: 'View of user',
-        width: '50%',
+        header: 'My Profile',
+        width: '25%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: false
