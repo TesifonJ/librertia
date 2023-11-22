@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-book-plist-unrouted',
   templateUrl: './admin-book-plist-unrouted.component.html',
   styleUrls: ['./admin-book-plist-unrouted.component.scss']
@@ -18,7 +19,7 @@ import { Subject } from 'rxjs';
 export class AdminBookPlistUnroutedComponent {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() id_user: number = 0; //filter by user
+  @Input() owner_id: number = 0; //filter by user
 
   oPage: IBookPage | undefined;
   oUser: IUser | null = null; // data of user if id_user is set for filter
@@ -39,7 +40,7 @@ export class AdminBookPlistUnroutedComponent {
 
   ngOnInit() {
     this.getPage();
-    if (this.id_user > 0) {
+    if (this.owner_id > 0) {
       this.getUser();
     }
     this.forceReload.subscribe({
@@ -52,7 +53,7 @@ export class AdminBookPlistUnroutedComponent {
   }
 
   getPage(): void {
-    this.oBookAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_user).subscribe({
+    this.oBookAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.owner_id).subscribe({
       next: (data: IBookPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
@@ -79,10 +80,10 @@ export class AdminBookPlistUnroutedComponent {
     this.getPage();
   }
 
-  doView(u: IBook) {
+  doView(b: IBook) {
     this.ref = this.oDialogService.open(AdminBookDetailUnroutedComponent, {
       data: {
-        id: u.id
+        id: b.id
       },
       header: 'View of Book',
       width: '50%',
@@ -114,7 +115,7 @@ export class AdminBookPlistUnroutedComponent {
   }
 
   getUser(): void {
-    this.oUserAjaxService.getOne(this.id_user).subscribe({
+    this.oUserAjaxService.getOne(this.owner_id).subscribe({
       next: (data: IUser) => {
         this.oUser = data;
       },

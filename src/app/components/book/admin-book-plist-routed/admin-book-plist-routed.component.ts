@@ -13,7 +13,7 @@ import { BookAjaxService } from 'src/app/services/book.ajax.service';
 export class AdminBookPlistRoutedComponent {
 
   forceReload: Subject<boolean> = new Subject<boolean>();
-  id_user: number;
+  owner_id: number;
   bLoading: boolean = false;
 
   constructor(
@@ -22,7 +22,7 @@ export class AdminBookPlistRoutedComponent {
     private oConfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
   ) {
-    this.id_user = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
+    this.owner_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
   }
 
   ngOnInit() { }
@@ -45,7 +45,6 @@ export class AdminBookPlistRoutedComponent {
     this.oConfirmationService.confirm({
       target: $event.target as EventTarget, 
       message: 'Are you sure that you want to remove all the Books?',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.oBookAjaxService.empty().subscribe({
           next: (oResponse: number) => {
