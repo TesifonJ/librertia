@@ -15,6 +15,7 @@ import { AdminBookPlistRoutedComponent } from './components/book/admin-book-plis
 import { AdminBookViewRoutedComponent } from './components/book/admin-book-view-routed/admin-book-view-routed.component';
 import { AdminBookNewRoutedComponent } from './components/book/admin-book-new-routed/admin-book-new-routed.component';
 import { AdminBookEditRoutedComponent } from './components/book/admin-book-edit-routed/admin-book-edit-routed.component';
+import { NormalUserViewRoutedComponent } from './components/user/normal-user-view-routed/normal-user-view-routed.component';
 
 const routes: Routes = [
   //Shared
@@ -22,11 +23,13 @@ const routes: Routes = [
   { path: 'home', component: HomeRoutedComponent },
   { path: 'login', component: LoginRoutedComponent },
   { path: 'logout', component: LogoutRoutedComponent },
-  //User
+  //Admin User
   { path: 'admin/user/plist', component: AdminUserPlistRoutedComponent },
   { path: 'admin/user/view/:id', component: AdminUserViewRoutedComponent },    
   { path: 'admin/user/new', component: AdminUserNewRoutedComponent },
   { path: 'admin/user/edit/:id', component: AdminUserEditRoutedComponent },
+  //Normal User
+  { path: 'normal/user/view/:id', component: NormalUserViewRoutedComponent },
   //Book 
   { path: 'admin/book/plist', component: AdminBookPlistRoutedComponent },
   { path: 'admin/book/view/:id', component: AdminBookViewRoutedComponent },    
@@ -43,6 +46,7 @@ const routes: Routes = [
   { path: 'admin/loan/plist/byuser/:iduser', component: AdminLoanPlistRoutedComponent },  
   { path: 'admin/loan/plist/bybook/:idbook', component: AdminLoanPlistRoutedComponent },  
   //--
+
 ];
 
 @NgModule({

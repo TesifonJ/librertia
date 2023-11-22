@@ -70,6 +70,7 @@ import { UserBookFeaturedUnroutedComponent } from './components/book/user-book-f
 import { DatePipe } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePickerComponent } from './components/shared/date-picker/date-picker.component';
+import { NormalUserViewRoutedComponent } from './components/user/normal-user-view-routed/normal-user-view-routed.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { DatePickerComponent } from './components/shared/date-picker/date-picker
     //Normal User
     NormalUserFeaturedUnroutedComponent,
     NormalUserDetailUnroutedComponent,
+    NormalUserViewRoutedComponent,
     //User Book
     UserBookFormUnroutedComponent,
     UserBookPlistUnroutedComponent,

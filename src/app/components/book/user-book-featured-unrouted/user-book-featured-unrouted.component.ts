@@ -34,7 +34,9 @@ export class UserBookFeaturedUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.oBookAjaxService.getPageByLoansNumberDesc(this.oPaginatorState.rows, this.oPaginatorState.page, 0).subscribe({
+    const pageSize = 5; 
+  
+    this.oBookAjaxService.getPageByLoansNumberDesc(pageSize, this.oPaginatorState.page, 0).subscribe({
       next: (data: IBookPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
@@ -42,8 +44,9 @@ export class UserBookFeaturedUnroutedComponent implements OnInit {
       error: (error: HttpErrorResponse) => {
         this.status = error;
       }
-    })
+    });
   }
+  
 
 
 
